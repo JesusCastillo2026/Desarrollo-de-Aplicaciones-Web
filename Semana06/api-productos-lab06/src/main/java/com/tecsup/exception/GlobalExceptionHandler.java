@@ -6,14 +6,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestControllerAdvice
-public class GlobalExceptionHandler {
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> manejarErrores(MethodArgumentNotValidException ex) {
-        Map<String, String> errores = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error -> {
-            errores.put(error.getField(), error.getDefaultMessage());
-        });
-        return ResponseEntity.badRequest().body(errores);
+@RestControllerAdvice  
+public class GlobalExceptionHandler {    
+
+    // Manejador de errores de validación (El que ya teníamos)
+    @ExceptionHandler(MethodArgumentNotValidException.class)    
+    public ResponseEntity<Map<String, String>> manejarErrores(MethodArgumentNotValidException ex) {        
+        Map<String, String> errores = new HashMap<>();        
+        ex.getBindingResult().getFieldErrors().forEach(error -> {            
+            errores.put(error.getField(), error.getDefaultMessage());        
+        });        
+        return ResponseEntity.badRequest().body(errores);    
+    }
+
+    // NUEVO: Manejador para usuarios no autorizados (Faltan credenciales)
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<String> manejarUnauthorized(UnauthorizedException ex) {    
+        return ResponseEntity.status(401).body(ex.getMessage());
+    }    
+
+    // NUEVO: Manejador para usuarios sin permisos (Falta de Rol)
+    @ExceptionHandler(ForbiddenException.class)    
+    public ResponseEntity<String> manejarForbidden(ForbiddenException ex) {        
+        return ResponseEntity.status(403).body(ex.getMessage());    
     }
 }

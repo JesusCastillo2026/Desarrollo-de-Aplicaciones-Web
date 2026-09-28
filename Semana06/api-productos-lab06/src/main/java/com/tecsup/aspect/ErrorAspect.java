@@ -10,7 +10,7 @@ public class ErrorAspect {
 
     private final AuditoriaService auditoriaService;
 
-    // Inyección de dependencias por constructor
+    // Inyección por constructor
     public ErrorAspect(AuditoriaService auditoriaService) {
         this.auditoriaService = auditoriaService;
     }
@@ -20,14 +20,14 @@ public class ErrorAspect {
             throwing = "ex"
     )
     public void capturarError(Exception ex) {
-        // 1. Mantiene el comportamiento original de mostrar el error en consola
+        // 1. Muestra el error original en consola
         System.out.println("ERROR AOP: " + ex.getMessage());
 
-        // 2. PARTE 3: Registra dinámicamente el error en la base de datos
+        // 2. Registra el error en la base de datos (enviando 3 parámetros)
         auditoriaService.registrar(
                 "ERROR",
                 "Fallo en el sistema",
-                ex.getMessage() // Captura el mensaje exacto de la excepción
+                ex.getMessage() 
         );
     }
 }
