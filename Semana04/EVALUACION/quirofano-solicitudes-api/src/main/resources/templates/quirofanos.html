@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Administración de quirófanos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"></head>
+<body class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4"><div><h1 class="h3 text-primary">Administración de quirófanos</h1><p class="text-muted">Registre salas, equipamiento y disponibilidad.</p></div>
+        <a th:href="@{/web/solicitudes/home}" class="btn btn-outline-secondary">Inicio</a></div>
+    <form th:action="@{/web/solicitudes/quirofanos/guardar}" th:object="${quirofano}" method="post" class="card card-body shadow-sm mb-4">
+        <h2 class="h5">Registrar quirófano</h2><div class="row g-3"><div class="col-md-3"><label class="form-label">Código</label><input th:field="*{codigo}" class="form-control" required></div>
+        <div class="col-md-3"><label class="form-label">Nombre</label><input th:field="*{nombre}" class="form-control" required></div><div class="col-md-2"><label class="form-label">Área</label><input th:field="*{area}" class="form-control"></div>
+        <div class="col-md-2"><label class="form-label">Capacidad</label><input th:field="*{capacidad}" type="number" min="1" class="form-control"></div><div class="col-md-2"><label class="form-label">Estado</label><select th:field="*{estado}" class="form-select"><option value="DISPONIBLE">DISPONIBLE</option><option value="MANTENIMIENTO">MANTENIMIENTO</option><option value="FUERA_DE_SERVICIO">FUERA DE SERVICIO</option></select></div>
+        <div class="col-12"><label class="form-label">Equipamiento</label><textarea th:field="*{equipamiento}" class="form-control" rows="2"></textarea></div><div class="col-12 text-end"><button class="btn btn-primary">Guardar quirófano</button></div></div>
+    </form>
+    <div class="table-responsive card shadow-sm"><table class="table table-striped mb-0"><thead><tr><th>Código</th><th>Nombre</th><th>Área</th><th>Capacidad</th><th>Equipamiento</th><th>Estado y actualización</th></tr></thead><tbody>
+        <tr th:if="${#lists.isEmpty(quirofanos)}"><td colspan="6" class="text-center text-muted">Aún no hay quirófanos registrados.</td></tr><tr th:each="q : ${quirofanos}"><td th:text="${q.codigo}"></td><td th:text="${q.nombre}"></td><td th:text="${q.area}"></td><td th:text="${q.capacidad}"></td><td th:text="${q.equipamiento}"></td>
+            <td><form th:action="@{/web/solicitudes/quirofanos/guardar}" method="post" class="d-flex gap-2"><input type="hidden" name="idQuirofano" th:value="${q.idQuirofano}"><input type="hidden" name="codigo" th:value="${q.codigo}"><input type="hidden" name="nombre" th:value="${q.nombre}"><input type="hidden" name="area" th:value="${q.area}"><input type="hidden" name="capacidad" th:value="${q.capacidad}"><input type="hidden" name="equipamiento" th:value="${q.equipamiento}">
+                <select name="estado" class="form-select form-select-sm"><option th:each="st : ${ {'DISPONIBLE','RESERVADO','EN_USO','MANTENIMIENTO','FUERA_DE_SERVICIO'} }" th:value="${st}" th:selected="${st == q.estado}" th:text="${st}"></option></select><button class="btn btn-sm btn-outline-primary">Actualizar</button></form></td></tr>
+    </tbody></table></div>
+</body>
+</html>

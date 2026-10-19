@@ -16,7 +16,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h2 class="mb-0 text-primary" style="font-weight: bold;">Solicitudes Quirúrgicas</h2>
-            <p class="text-muted">Bandeja de programación</p>
+            <p class="text-muted">Bandeja de solicitudes quirúrgicas</p>
         </div>
         <div>
             <a th:href="@{/web/solicitudes/home}" class="btn btn-outline-secondary me-2">Regresar al Inicio</a>
@@ -34,12 +34,13 @@
                     <th>Procedimiento</th>
                     <th>Prioridad</th>
                     <th>Estado</th>
+                    <th>Proceso quirúrgico</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:if="${#lists.isEmpty(solicitudes)}">
-                    <td colspan="7" class="text-muted py-5">No hay intervenciones programadas.</td>
+                    <td colspan="8" class="text-muted py-5">No hay solicitudes registradas.</td>
                 </tr>
                 <tr th:each="s : ${solicitudes}">
                     <td th:text="${s.idSolicitud}" class="fw-bold">1</td>
@@ -52,8 +53,10 @@
                     <td>
                         <span class="badge rounded-pill" th:classappend="${s.estado == 'SOLICITADA' ? 'bg-primary' : (s.estado == 'CANCELADA' ? 'bg-danger' : 'bg-success')}" th:text="${s.estado}"></span>
                     </td>
+                    <td><a th:href="@{/web/solicitudes/{id}/evaluacion(id=${s.idSolicitud})}" class="btn btn-sm btn-outline-primary">Evaluación / decisión</a></td>
                     <td>
                         <div class="d-inline-flex gap-2">
+                            <a th:href="@{/web/solicitudes/{id}/programar(id=${s.idSolicitud})}" class="btn btn-sm btn-outline-success">Programar</a>
                             <form th:if="${s.estado != 'CANCELADA'}" th:action="@{/web/solicitudes/{id}/cancelar(id=${s.idSolicitud})}" method="post" onsubmit="return confirm('¿Seguro que desea cancelar la intervención?');">
                                 <button type="submit" class="btn btn-sm btn-outline-warning">Cancelar</button>
                             </form>

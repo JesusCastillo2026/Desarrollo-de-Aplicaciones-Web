@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Programación quirúrgica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"></head>
+<body class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4"><div><h1 class="h3 text-primary">Programación quirúrgica</h1>
+        <p class="text-muted mb-0">Solicitud <span th:text="${solicitud.numeroSolicitud}"></span> · <span th:text="${solicitud.procedimiento}"></span></p></div>
+        <a th:href="@{/web/solicitudes/programaciones}" class="btn btn-outline-secondary">Ver agenda</a></div>
+    <div class="alert alert-info">La solicitud debe tener evaluación APTA y decisión APROBADA. El sistema valida disponibilidad de quirófano y profesionales.</div>
+    <form th:action="@{/web/solicitudes/programaciones/guardar}" method="post" class="card card-body shadow-sm row g-3">
+        <input type="hidden" name="solicitudId" th:value="${solicitud.idSolicitud}">
+        <input type="hidden" name="idProgramacion" th:if="${programacion != null}" th:value="${programacion.idProgramacion}">
+        <div class="col-md-6"><label class="form-label">Quirófano</label><select name="quirofanoId" class="form-select" required>
+            <option value="">Seleccione</option><option th:each="q : ${quirofanos}" th:if="${q.estado == 'DISPONIBLE'}" th:value="${q.idQuirofano}" th:selected="${programacion != null and programacion.quirofano.idQuirofano == q.idQuirofano}" th:text="${q.codigo + ' - ' + q.nombre}"></option></select></div>
+        <div class="col-md-6"><label class="form-label">Prioridad</label><select name="prioridad" class="form-select"><option value="NORMAL">NORMAL</option><option value="URGENTE">URGENTE</option><option value="EMERGENCIA">EMERGENCIA</option></select></div>
+        <div class="col-md-6"><label class="form-label">Cirujano</label><select name="cirujanoId" class="form-select" required><option value="">Seleccione</option>
+            <option th:each="m : ${medicos}" th:value="${m.idMedico}" th:selected="${programacion != null and programacion.cirujano.idMedico == m.idMedico}" th:text="${m.nombres + ' ' + m.apellidos + ' — ' + m.especialidad}"></option></select></div>
+        <div class="col-md-6"><label class="form-label">Anestesiólogo</label><select name="anestesiologoId" class="form-select" required><option value="">Seleccione</option>
+            <option th:each="m : ${medicos}" th:value="${m.idMedico}" th:selected="${programacion != null and programacion.anestesiologo.idMedico == m.idMedico}" th:text="${m.nombres + ' ' + m.apellidos + ' — ' + m.especialidad}"></option></select></div>
+        <div class="col-md-6"><label class="form-label">Fecha y hora de inicio</label><input type="datetime-local" name="fechaHoraInicio" class="form-control" required th:value="${programacion != null ? #strings.substring(programacion.fechaHoraInicio.toString(), 0, 16) : ''}"></div>
+        <div class="col-md-6"><label class="form-label">Duración estimada (minutos)</label><input type="number" name="duracionEstimadaMinutos" class="form-control" min="1" max="1440" required th:value="${programacion != null ? programacion.duracionEstimadaMinutos : 60}"></div>
+        <div class="col-12"><label class="form-label">Equipo quirúrgico adicional (opcional)</label>
+            <div class="row g-2 mb-2" th:each="persona : ${equipo}">
+                <div class="col-md-6"><select name="integrantesMedicoId" class="form-select"><option value="">Seleccione profesional</option>
+                    <option th:each="m : ${medicos}" th:value="${m.idMedico}" th:selected="${m.idMedico == persona.medico.idMedico}" th:text="${m.nombres + ' ' + m.apellidos}"></option></select></div>
+                <div class="col-md-6"><input name="integrantesFunciones" class="form-control" placeholder="Función" th:value="${persona.funcion}"></div>
+            </div>
+            <div class="row g-2 mb-2" th:each="fila : ${#numbers.sequence(1, 2)}">
+                <div class="col-md-6"><select name="integrantesMedicoId" class="form-select"><option value="">Seleccione profesional</option>
+                    <option th:each="m : ${medicos}" th:value="${m.idMedico}" th:text="${m.nombres + ' ' + m.apellidos}"></option></select></div>
+                <div class="col-md-6"><input name="integrantesFunciones" class="form-control" placeholder="Ej. Enfermería instrumentista"></div>
+            </div>
+        </div>
+        <div class="col-12" th:if="${programacion != null}"><label class="form-label">Motivo de reprogramación</label><textarea name="motivoCambio" class="form-control" rows="2" required></textarea></div>
+        <div class="col-12" th:if="${programacion != null}"><label class="form-label">Responsable del cambio</label><input name="responsableCambio" class="form-control" required></div>
+        <div class="col-12 text-end"><a th:href="@{/web/solicitudes}" class="btn btn-light border">Cancelar</a> <button class="btn btn-primary" th:text="${programacion != null ? 'Guardar reprogramación' : 'Programar cirugía'}"></button></div>
+    </form>
+</body>
+</html>

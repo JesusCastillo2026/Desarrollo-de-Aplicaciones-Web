@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Agenda quirúrgica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"></head>
+<body class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4"><div><h1 class="h3 text-primary">Agenda quirúrgica</h1><p class="text-muted">Programaciones, equipo y estado de las cirugías.</p></div>
+        <a th:href="@{/web/solicitudes/home}" class="btn btn-outline-secondary">Inicio</a></div>
+    <div class="table-responsive card shadow-sm"><table class="table table-hover align-middle mb-0"><thead class="table-light"><tr><th>Fecha/hora</th><th>Solicitud / procedimiento</th><th>Paciente</th><th>Quirófano</th><th>Equipo principal</th><th>Fin estimado</th><th>Estado</th><th>Acciones</th></tr></thead>
+        <tbody><tr th:if="${#lists.isEmpty(programaciones)}"><td colspan="8" class="text-center text-muted py-4">No hay cirugías programadas.</td></tr>
+        <tr th:each="p : ${programaciones}"><td th:text="${p.fechaHoraInicio}"></td><td><span th:text="${p.solicitud.numeroSolicitud}"></span><br><small th:text="${p.solicitud.procedimiento}"></small></td>
+            <td th:text="${p.solicitud.paciente.nombres + ' ' + p.solicitud.paciente.apellidos}"></td><td th:text="${p.quirofano.codigo + ' - ' + p.quirofano.nombre}"></td>
+            <td>Cirujano: <span th:text="${p.cirujano.nombres + ' ' + p.cirujano.apellidos}"></span><br>Anestesiólogo: <span th:text="${p.anestesiologo.nombres + ' ' + p.anestesiologo.apellidos}"></span></td>
+            <td th:text="${p.fechaHoraFinEstimada}"></td><td><span class="badge" th:classappend="${p.estado == 'CANCELADA' ? 'text-bg-danger' : 'text-bg-success'}" th:text="${p.estado}"></span><br><small th:if="${p.motivoUltimoCambio != null}" th:text="${'Cambio: ' + p.motivoUltimoCambio}"></small></td>
+            <td><div class="d-flex flex-column gap-2"><a th:if="${p.estado != 'CANCELADA'}" th:href="@{/web/solicitudes/programaciones/{id}/editar(id=${p.idProgramacion})}" class="btn btn-sm btn-outline-primary">Reprogramar</a>
+                <form th:if="${p.estado != 'CANCELADA'}" th:action="@{/web/solicitudes/programaciones/{id}/cancelar(id=${p.idProgramacion})}" method="post" class="vstack gap-1">
+                    <input name="responsable" class="form-control form-control-sm" placeholder="Responsable" required><input name="motivo" class="form-control form-control-sm" placeholder="Motivo de cancelación" required>
+                    <button class="btn btn-sm btn-outline-danger">Cancelar</button></form></div></td></tr></tbody></table></div>
+</body>
+</html>

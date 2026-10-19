@@ -24,8 +24,26 @@
             <div class="card hospital-card h-100 text-center shadow-sm p-4">
                 <div class="card-body">
                     <h4 class="card-title text-primary mb-3">Nueva Solicitud</h4>
-                    <p class="card-text text-muted mb-4">Programe una nueva intervención quirúrgica en el sistema.</p>
+                    <p class="card-text text-muted mb-4">Registre una solicitud de intervención para iniciar el proceso quirúrgico.</p>
                     <a th:href="@{/web/solicitudes/nueva}" class="btn btn-primary btn-lg w-100">Registrar Solicitud</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 mb-4">
+            <div class="card hospital-card h-100 text-center shadow-sm p-4" style="border-top-color: #6f42c1;">
+                <div class="card-body">
+                    <h4 class="card-title mb-3" style="color:#6f42c1">Programación quirúrgica</h4>
+                    <p class="card-text text-muted mb-4">Revise la agenda, reprograme o cancele cirugías.</p>
+                    <a th:href="@{/web/solicitudes/programaciones}" class="btn btn-lg w-100 text-white" style="background:#6f42c1">Ver programación</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 mb-4">
+            <div class="card hospital-card h-100 text-center shadow-sm p-4" style="border-top-color: #fd7e14;">
+                <div class="card-body">
+                    <h4 class="card-title text-warning mb-3">Quirófanos</h4>
+                    <p class="card-text text-muted mb-4">Registre salas, equipamiento y disponibilidad.</p>
+                    <a th:href="@{/web/solicitudes/quirofanos}" class="btn btn-warning btn-lg w-100">Administrar quirófanos</a>
                 </div>
             </div>
         </div>
