@@ -107,7 +107,7 @@ Ejecución verificada con `./mvnw.cmd clean test`: **28 pruebas**, 0 fallidas, 0
 | `CategoriaServiceTest` | Reglas CRUD, inexistentes y duplicados | 7 aprobadas |
 | `CategoriaControllerTest` | Respuestas HTTP, validación y CRUD de categorías | 7 aprobadas |
 
-El informe PDF contiene el desarrollo, fragmentos de código en cuadros sin relleno, flujo de datos, evidencias de la ejecución y conclusiones.
+El informe PDF contiene el código implementado de los componentes principales y las clases de pruebas, con una explicación del propósito de cada bloque; además incluye el flujo de datos, resultados de ejecución y conclusiones.
 
 ## Observaciones
 
@@ -124,3 +124,4 @@ El informe PDF contiene el desarrollo, fragmentos de código en cuadros sin rell
 3. El CRUD de categorías amplía la API y muestra cómo organizar una nueva funcionalidad en capas sin mezclar las responsabilidades.
 4. Usar H2 como base temporal facilita repetir las pruebas y evita modificar registros reales o requerir que MySQL esté disponible.
 5. La ejecución completa de Maven terminó sin fallos; por eso el proyecto queda con una verificación automatizada que se puede repetir mediante `./mvnw.cmd clean test`.
+
