@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant P as Postman
+    participant A as AuthController
+    participant S as Spring Security
+    participant J as JwtUtils
+    participant F as JwtAuthFilter
+    participant C as TestController
+    P->>A: POST /api/auth/signin (correo y contraseña)
+    A->>S: AuthenticationManager valida BCrypt
+    S-->>A: Principal autenticado con autoridades
+    A->>J: Generar JWT firmado y con expiración
+    J-->>P: accessToken Bearer
+    P->>F: GET protegido con Authorization: Bearer
+    F->>J: Validar firma y expiración
+    F->>S: Establecer Authentication en SecurityContextHolder
+    S->>C: Verificar rol y permitir la ruta
+    C-->>P: 200, 401 o 403

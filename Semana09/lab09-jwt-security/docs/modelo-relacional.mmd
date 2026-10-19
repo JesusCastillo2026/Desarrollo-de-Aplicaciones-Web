@@ -1,0 +1,18 @@
+erDiagram
+    USERS ||--o{ USER_ROLES : tiene
+    ROLES ||--o{ USER_ROLES : asigna
+
+    USERS {
+        bigint id PK
+        varchar username UK
+        varchar email UK
+        varchar password "hash BCrypt"
+    }
+    ROLES {
+        bigint id PK
+        varchar name UK
+    }
+    USER_ROLES {
+        bigint user_id PK, FK
+        bigint role_id PK, FK
+    }

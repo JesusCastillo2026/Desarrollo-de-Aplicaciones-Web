@@ -1,0 +1,110 @@
+{
+  "info": {
+    "name": "Lab09 - Autenticación JWT y roles",
+    "description": "Solicitudes para registrar, autenticar y validar acceso público y por roles.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "adminToken", "value": "" },
+    { "key": "userToken", "value": "" },
+    { "key": "moderatorToken", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "1 - Registro público USER",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"username\": \"postman-user\",\n  \"email\": \"postman-user@test.com\",\n  \"password\": \"UserPostman@09\"\n}" },
+        "url": "{{baseUrl}}/api/auth/signup"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Registro creado o ya existente', function () { pm.expect([201, 409]).to.include(pm.response.code); });"] } }]
+    },
+    {
+      "name": "1b - El registro no permite asignar ADMIN (400)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"username\": \"forbidden-admin\",\n  \"email\": \"forbidden-admin@test.com\",\n  \"password\": \"SecurePass@09\",\n  \"roles\": [\"ADMIN\"]\n}" },
+        "url": "{{baseUrl}}/api/auth/signup"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('El registro público no concede ADMIN', function () { pm.response.to.have.status(400); });"] } }]
+    },
+    {
+      "name": "2 - Login ADMIN (guarda adminToken)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@test.com\",\n  \"password\": \"Admin@S09\"\n}" },
+        "url": "{{baseUrl}}/api/auth/signin"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Login ADMIN correcto', function () { pm.response.to.have.status(200); });", "if (pm.response.code === 200) pm.collectionVariables.set('adminToken', pm.response.json().accessToken);"] } }]
+    },
+    {
+      "name": "3 - Login USER (guarda userToken)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"user@test.com\",\n  \"password\": \"User@S09\"\n}" },
+        "url": "{{baseUrl}}/api/auth/signin"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Login USER correcto', function () { pm.response.to.have.status(200); });", "if (pm.response.code === 200) pm.collectionVariables.set('userToken', pm.response.json().accessToken);"] } }]
+    },
+    {
+      "name": "4 - Login MODERATOR (guarda moderatorToken)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"moderator@test.com\",\n  \"password\": \"Mod@S09\"\n}" },
+        "url": "{{baseUrl}}/api/auth/signin"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Login MODERATOR correcto', function () { pm.response.to.have.status(200); });", "if (pm.response.code === 200) pm.collectionVariables.set('moderatorToken', pm.response.json().accessToken);"] } }]
+    },
+    {
+      "name": "4b - Login con contraseña incorrecta (401)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@test.com\",\n  \"password\": \"incorrecta\"\n}" },
+        "url": "{{baseUrl}}/api/auth/signin"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Credenciales incorrectas responden 401', function () { pm.response.to.have.status(401); });"] } }]
+    },
+    {
+      "name": "Escenario 1 - Ruta pública sin token (200)",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/test/all" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('La ruta pública responde 200', function () { pm.response.to.have.status(200); });"] } }]
+    },
+    {
+      "name": "Escenario 2 - Ruta USER sin token (401)",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/test/user" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Sin token responde 401', function () { pm.response.to.have.status(401); });"] } }]
+    },
+    {
+      "name": "Escenario 3 - Token inválido (401)",
+      "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer token.alterado.invalido" }], "url": "{{baseUrl}}/api/test/user" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Token inválido responde 401', function () { pm.response.to.have.status(401); });"] } }]
+    },
+    {
+      "name": "Escenario 4 - USER con token en su ruta (200)",
+      "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }], "url": "{{baseUrl}}/api/test/user" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('USER entra a su ruta', function () { pm.response.to.have.status(200); });"] } }]
+    },
+    {
+      "name": "Escenario 5 - USER en ruta ADMIN (403)",
+      "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }], "url": "{{baseUrl}}/api/test/admin" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('USER no puede entrar a ADMIN', function () { pm.response.to.have.status(403); });"] } }]
+    },
+    {
+      "name": "Escenario 6 - ADMIN con token en ruta ADMIN (200)",
+      "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }], "url": "{{baseUrl}}/api/test/admin" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('ADMIN entra a su ruta', function () { pm.response.to.have.status(200); });"] } }]
+    },
+    {
+      "name": "MODERATOR con token en ruta MODERATOR (200)",
+      "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{moderatorToken}}" }], "url": "{{baseUrl}}/api/test/mod" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('MODERATOR entra a su ruta', function () { pm.response.to.have.status(200); });"] } }]
+    }
+  ]
+}
