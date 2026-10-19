@@ -13,7 +13,7 @@ Portafolio de laboratorios y evaluaciones organizados por semana.
 > ## 📝 EVALUACIÓN 2 — SEMANA 08
 > Esta entrega amplía el Sistema de Gestión Quirúrgica con usuarios, roles, Spring Security, auditoría AOP y administración de cuentas.
 >
-> **Entrega:** [Abrir Evaluación 2](Semana08/Evaluaci%C3%B3n%202/README.md)
+> **Entrega:** [Abrir carpeta de Evaluación 2](Semana08/Evaluaci%C3%B3n%202/)
 ## Contenido
 
 | Semana | Trabajo | Objetivo |
