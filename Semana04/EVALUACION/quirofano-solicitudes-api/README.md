@@ -10,7 +10,7 @@ Gestionar el proceso quirúrgico desde la solicitud del procedimiento hasta su e
 
 El sistema se organiza en capas `controller`, `service`, `repository` y `entity`. Los controladores exponen operaciones REST y páginas Thymeleaf; los servicios validan el flujo y las reglas de disponibilidad; Hibernate persiste las entidades y sus claves foráneas en MySQL.
 
-Una solicitud se puede evaluar con estado `APTA`, `OBSERVADA` o `NO_APTA`. La decisión admite `APROBADA`, `OBSERVADA` o `RECHAZADA`. La programación requiere que la evaluación más reciente sea `APTA` y la decisión más reciente `APROBADA`. El sistema calcula la hora estimada de término y rechaza cruces de horario entre quirófano, cirujano, anestesiólogo o integrantes del equipo. La reprogramación y cancelación exigen motivo; las decisiones anteriores se conservan como historial.
+Una solicitud se puede evaluar con estado `APTA`, `OBSERVADA` o `NO_APTA`. La decisión admite `APROBADA`, `OBSERVADA` o `RECHAZADA`. La programación requiere que la evaluación más reciente sea `APTA` y la decisión más reciente `APROBADA`. El sistema calcula la hora estimada de término y rechaza cruces de horario entre quirófano, cirujano, anestesiólogo o integrantes del equipo. La reprogramación y cancelación exigen motivo; las decisiones anteriores se conservan como historial. Si la petición llega con una identidad autenticada, se guarda automáticamente como responsable; mientras esta evaluación no tiene inicio de sesión, el nombre se indica en el formulario o en Postman.
 
 ## Requerimientos funcionales
 

@@ -1,5 +1,6 @@
 package com.hospital.quirofano.controller;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -101,10 +102,11 @@ public class SolicitudWebController {
     @PostMapping("/{id}/decision")
     public String guardarDecision(@PathVariable Long id,
             @RequestParam String estado,
-            @RequestParam String responsable,
+            @RequestParam(required = false) String responsable,
             @RequestParam(required = false) String observacion,
-            @RequestParam(required = false) String motivo) {
-        gestionService.registrarDecision(id, new AprobacionRequest(estado, responsable, observacion, motivo));
+            @RequestParam(required = false) String motivo,
+            Principal principal) {
+        gestionService.registrarDecision(id, new AprobacionRequest(estado, responsableActual(responsable, principal), observacion, motivo));
         return "redirect:/web/solicitudes/" + id + "/evaluacion";
     }
 
@@ -149,7 +151,8 @@ public class SolicitudWebController {
             @RequestParam(required = false) String motivoCambio,
             @RequestParam(required = false) String responsableCambio,
             @RequestParam(required = false) List<Long> integrantesMedicoId,
-            @RequestParam(required = false) List<String> integrantesFunciones) {
+            @RequestParam(required = false) List<String> integrantesFunciones,
+            Principal principal) {
         List<IntegranteRequest> equipo = new java.util.ArrayList<>();
         if (integrantesMedicoId != null) {
             for (int i = 0; i < integrantesMedicoId.size(); i++) {
@@ -161,7 +164,7 @@ public class SolicitudWebController {
             }
         }
         ProgramacionRequest datos = new ProgramacionRequest(solicitudId, quirofanoId, cirujanoId, anestesiologoId,
-                fechaHoraInicio, duracionEstimadaMinutos, prioridad, motivoCambio, responsableCambio, equipo);
+                fechaHoraInicio, duracionEstimadaMinutos, prioridad, motivoCambio, responsableActual(responsableCambio, principal), equipo);
         if (idProgramacion == null) gestionService.programar(datos);
         else gestionService.reprogramar(idProgramacion, datos);
         return "redirect:/web/programaciones";
@@ -169,9 +172,10 @@ public class SolicitudWebController {
 
     @PostMapping("/programaciones/{id}/cancelar")
     public String cancelarProgramacion(@PathVariable Long id,
-            @RequestParam String responsable,
-            @RequestParam String motivo) {
-        gestionService.cancelarProgramacion(id, responsable, motivo);
+            @RequestParam(required = false) String responsable,
+            @RequestParam String motivo,
+            Principal principal) {
+        gestionService.cancelarProgramacion(id, responsableActual(responsable, principal), motivo);
         return "redirect:/web/programaciones";
     }
 
@@ -186,5 +190,9 @@ public class SolicitudWebController {
     public String guardarQuirofano(@ModelAttribute Quirofano quirofano) {
         gestionService.guardarQuirofano(quirofano);
         return "redirect:/web/solicitudes/quirofanos";
+    }
+
+    private String responsableActual(String responsableCapturado, Principal principal) {
+        return principal == null ? responsableCapturado : principal.getName();
     }
 }

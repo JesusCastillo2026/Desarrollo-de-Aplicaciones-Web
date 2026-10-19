@@ -8,7 +8,7 @@ Completar el módulo de Quirófano / Cirugía del sistema hospitalario con tres 
 
 La aplicación mantiene arquitectura por capas con controladores, servicios, repositorios y entidades JPA. La solicitud existente se amplió con registros de evaluación preoperatoria, decisiones de aprobación, programación, quirófanos e integrantes del equipo.
 
-Las reglas del servicio exigen una evaluación APTA y una decisión APROBADA para programar. La agenda verifica que el quirófano, el cirujano, el anestesiólogo y el personal incluido no tengan otra intervención en el mismo intervalo. La reprogramación y cancelación conservan el motivo. Las pantallas Thymeleaf permiten administrar solicitudes, evaluaciones, decisiones, quirófanos y programaciones.
+Las reglas del servicio exigen una evaluación APTA y una decisión APROBADA para programar. La agenda verifica que el quirófano, el cirujano, el anestesiólogo y el personal incluido no tengan otra intervención en el mismo intervalo. La reprogramación y cancelación conservan el motivo. Cuando el servidor entrega una identidad autenticada, se registra automáticamente como responsable; en esta versión sin inicio de sesión, el responsable se indica en el formulario o la petición. Las pantallas Thymeleaf permiten administrar solicitudes, evaluaciones, decisiones, quirófanos y programaciones.
 
 ## Requerimientos
 

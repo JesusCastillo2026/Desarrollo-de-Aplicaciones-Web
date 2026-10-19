@@ -1,5 +1,6 @@
 package com.hospital.quirofano.controller;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -63,8 +64,11 @@ public class GestionQuirurgicaController {
     }
 
     @PostMapping("/solicitudes/{id}/aprobaciones")
-    public ResponseEntity<AprobacionCirugia> registrarDecision(@PathVariable Long id, @RequestBody AprobacionRequest datos) {
-        return ResponseEntity.ok(gestionService.registrarDecision(id, datos));
+    public ResponseEntity<AprobacionCirugia> registrarDecision(@PathVariable Long id, @RequestBody AprobacionRequest datos,
+            Principal principal) {
+        AprobacionRequest decision = principal == null ? datos
+                : new AprobacionRequest(datos.estado(), principal.getName(), datos.observacion(), datos.motivo());
+        return ResponseEntity.ok(gestionService.registrarDecision(id, decision));
     }
 
     @GetMapping("/quirofanos")
@@ -115,8 +119,9 @@ public class GestionQuirurgicaController {
     }
 
     @PutMapping("/programaciones/{id}/cancelar")
-    public ProgramacionCirugia cancelarProgramacion(@PathVariable Long id, @RequestBody DecisionRequest datos) {
-        return gestionService.cancelarProgramacion(id, datos.responsable(), datos.motivo());
+    public ProgramacionCirugia cancelarProgramacion(@PathVariable Long id, @RequestBody DecisionRequest datos, Principal principal) {
+        String responsable = principal == null ? datos.responsable() : principal.getName();
+        return gestionService.cancelarProgramacion(id, responsable, datos.motivo());
     }
 
     @GetMapping("/programaciones/{id}/equipo")
