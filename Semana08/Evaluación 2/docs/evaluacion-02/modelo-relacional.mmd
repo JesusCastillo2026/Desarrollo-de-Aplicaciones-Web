@@ -1,0 +1,81 @@
+erDiagram
+    ROLES ||--o{ USUARIOS : asigna
+    PACIENTES ||--o{ SOLICITUD_CIRUGIA : paciente
+    MEDICOS ||--o{ SOLICITUD_CIRUGIA : solicita
+    HISTORIA_CLINICA ||--o{ SOLICITUD_CIRUGIA : referencia
+    SOLICITUD_CIRUGIA ||--o{ EVALUACIONES_PREOPERATORIAS : recibe
+    MEDICOS ||--o{ EVALUACIONES_PREOPERATORIAS : evalua
+    SOLICITUD_CIRUGIA ||--o{ APROBACIONES_CIRUGIA : decision
+    SOLICITUD_CIRUGIA ||--o{ PROGRAMACIONES_CIRUGIA : agenda
+    QUIROFANOS ||--o{ PROGRAMACIONES_CIRUGIA : ocupa
+    MEDICOS ||--o{ PROGRAMACIONES_CIRUGIA : cirujano
+    MEDICOS ||--o{ PROGRAMACIONES_CIRUGIA : anestesiologo
+    PROGRAMACIONES_CIRUGIA ||--o{ INTEGRANTES_EQUIPO_QUIRURGICO : equipo
+    MEDICOS ||--o{ INTEGRANTES_EQUIPO_QUIRURGICO : integra
+
+    ROLES {
+        bigint id_rol PK
+        varchar nombre_rol UK
+        varchar descripcion
+        boolean activo
+    }
+    USUARIOS {
+        bigint id_usuario PK
+        varchar nombre_usuario UK
+        varchar correo UK
+        varchar password_hash
+        bigint rol_id FK
+        boolean activo
+    }
+    AUDITORIA_OPERACIONES {
+        bigint id_auditoria PK
+        varchar usuario
+        datetime fecha_hora
+        varchar operacion
+        varchar entidad
+        varchar registro_id
+    }
+    PACIENTES {
+        bigint id_paciente PK
+        varchar numero_documento
+    }
+    MEDICOS {
+        bigint id_medico PK
+        varchar cmp
+        varchar especialidad
+    }
+    HISTORIA_CLINICA {
+        bigint id_historia PK
+        varchar numero_historia
+    }
+    SOLICITUD_CIRUGIA {
+        bigint id_solicitud PK
+        bigint paciente_id FK
+        bigint medico_solicitante_id FK
+        bigint historia_clinica_id FK
+    }
+    EVALUACIONES_PREOPERATORIAS {
+        bigint id_evaluacion PK
+        bigint solicitud_id FK
+        bigint profesional_id FK
+    }
+    APROBACIONES_CIRUGIA {
+        bigint id_aprobacion PK
+        bigint solicitud_id FK
+    }
+    QUIROFANOS {
+        bigint id_quirofano PK
+        varchar codigo
+    }
+    PROGRAMACIONES_CIRUGIA {
+        bigint id_programacion PK
+        bigint solicitud_id FK
+        bigint quirofano_id FK
+        bigint cirujano_id FK
+        bigint anestesiologo_id FK
+    }
+    INTEGRANTES_EQUIPO_QUIRURGICO {
+        bigint id_integrante PK
+        bigint programacion_id FK
+        bigint medico_id FK
+    }

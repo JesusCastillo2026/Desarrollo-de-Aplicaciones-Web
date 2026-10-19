@@ -1,0 +1,12 @@
+id_rol	nombre_rol	descripcion	activo
+1	ADMINISTRADOR	Administra usuarios, roles y el sistema.	
+2	MEDICO	Gestiona evaluaciones y programaci�n quir�rgica.	
+3	RECEPCIONISTA	Registra y consulta solicitudes quir�rgicas.	
+id_usuario	nombre_usuario	nombre_rol	activo
+1	admin	ADMINISTRADOR	
+2	medico.demo	MEDICO	
+3	recepcion.demo	RECEPCIONISTA	
+id_auditoria	usuario	fecha_hora	operacion	entidad	registro_id
+1	admin	2026-10-18 23:20:32.000000	CREAR	usuarios	2
+2	admin	2026-10-18 23:20:32.000000	CREAR	usuarios	3
+3	admin	2026-10-18 23:22:29.000000	MODIFICAR	usuarios	2

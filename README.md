@@ -8,6 +8,12 @@ Portafolio de laboratorios y evaluaciones organizados por semana.
 >
 > **Entrega:** [Abrir la carpeta de evaluación](Semana04/EVALUACION/)
 
+
+> [!IMPORTANT]
+> ## 📝 EVALUACIÓN 2 — SEMANA 08
+> Esta entrega amplía el Sistema de Gestión Quirúrgica con usuarios, roles, Spring Security, auditoría AOP y administración de cuentas.
+>
+> **Entrega:** [Abrir Evaluación 2](Semana08/Evaluaci%C3%B3n%202/README.md)
 ## Contenido
 
 | Semana | Trabajo | Objetivo |
@@ -19,5 +25,7 @@ Portafolio de laboratorios y evaluaciones organizados por semana.
 | [Semana 05](Semana05/README.md) | API de productos — Lab 05 | Implementar operaciones CRUD de productos con validación y persistencia relacional. |
 | [Semana 06](Semana06/README.md) | API de productos — Lab 06 | Incorporar auditoría transversal de operaciones usando programación orientada a aspectos (AOP). |
 | [Semana 07](Semana07/README.md) | API REST segura — Lab 07 | Autenticar con HTTP Basic, cifrar contraseñas con BCrypt y restringir rutas según roles mediante Spring Security. |
+| [Semana 08](Semana08/README.md) | Evaluación 2 — Sistema de Gestión Quirúrgica | Incorporar seguridad por roles, gestión de usuarios y auditoría automática al flujo quirúrgico. |
 
 Cada carpeta incluye un README con el objetivo, el trabajo realizado y las herramientas utilizadas. El código de los laboratorios está en la carpeta de su semana cuando corresponde.
+
