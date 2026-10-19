@@ -15,11 +15,6 @@ Portafolio de laboratorios y evaluaciones organizados por semana.
 >
 > **Entrega:** [Abrir carpeta de Evaluación 2](Semana08/Evaluaci%C3%B3n%202/)
 
-> [!IMPORTANT]
-> ## LABORATORIO 09 — AUTENTICACIÓN JWT
-> API REST nueva para registrar usuarios, autenticar con JWT y proteger rutas con roles `USER`, `ADMIN` y `MODERATOR`. Usa una base propia llamada `security_db`.
->
-> **Entrega:** [Abrir carpeta del Laboratorio 09](Semana09/lab09-jwt-security/)
 ## Contenido
 
 | Semana | Trabajo | Objetivo |
@@ -35,4 +30,3 @@ Portafolio de laboratorios y evaluaciones organizados por semana.
 | [Semana 09](Semana09/README.md) | Laboratorio 09 — Autenticación JWT | Emitir y validar tokens JWT y restringir endpoints REST según roles con Spring Security. |
 
 Cada carpeta incluye un README con el objetivo, el trabajo realizado y las herramientas utilizadas. El código de los laboratorios está en la carpeta de su semana cuando corresponde.
-
