@@ -1,0 +1,26 @@
+{
+  "groups": [
+    {
+      "name": "app.security.bootstrap-admin",
+      "type": "com.hospital.quirofano.config.BootstrapAdminProperties",
+      "sourceType": "com.hospital.quirofano.config.BootstrapAdminProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "app.security.bootstrap-admin.username",
+      "type": "java.lang.String",
+      "description": "Nombre de usuario para crear la cuenta administradora inicial."
+    },
+    {
+      "name": "app.security.bootstrap-admin.email",
+      "type": "java.lang.String",
+      "description": "Correo de la cuenta administradora inicial."
+    },
+    {
+      "name": "app.security.bootstrap-admin.password",
+      "type": "java.lang.String",
+      "description": "Contraseña inicial, cifrada con BCrypt al guardarse."
+    }
+  ]
+}

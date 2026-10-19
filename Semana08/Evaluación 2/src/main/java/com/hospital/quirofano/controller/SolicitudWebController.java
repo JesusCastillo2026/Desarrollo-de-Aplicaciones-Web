@@ -18,7 +18,6 @@ import com.hospital.quirofano.dto.AprobacionRequest;
 import com.hospital.quirofano.dto.EvaluacionRequest;
 import com.hospital.quirofano.dto.IntegranteRequest;
 import com.hospital.quirofano.dto.ProgramacionRequest;
-import com.hospital.quirofano.entity.EvaluacionPreoperatoria;
 import com.hospital.quirofano.entity.ProgramacionCirugia;
 import com.hospital.quirofano.entity.Quirofano;
 import com.hospital.quirofano.entity.SolicitudCirugia;

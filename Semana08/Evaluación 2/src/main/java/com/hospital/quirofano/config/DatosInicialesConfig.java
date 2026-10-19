@@ -1,10 +1,9 @@
 package com.hospital.quirofano.config;
 
-import java.util.List;
 import java.util.Locale;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +14,7 @@ import com.hospital.quirofano.repository.RolRepository;
 import com.hospital.quirofano.repository.UsuarioRepository;
 
 @Configuration
+@EnableConfigurationProperties(BootstrapAdminProperties.class)
 public class DatosInicialesConfig {
 
     @Bean
@@ -22,23 +22,21 @@ public class DatosInicialesConfig {
             RolRepository rolRepository,
             UsuarioRepository usuarioRepository,
             PasswordEncoder passwordEncoder,
-            @Value("${app.security.bootstrap-admin.username:admin}") String usuarioAdmin,
-            @Value("${app.security.bootstrap-admin.email:admin@hospital.local}") String correoAdmin,
-            @Value("${app.security.bootstrap-admin.password:Admin123!}") String claveAdmin) {
+            BootstrapAdminProperties bootstrapAdmin) {
         return args -> {
             crearRolSiNoExiste(rolRepository, "ADMINISTRADOR", "Administra usuarios, roles y el sistema.");
             crearRolSiNoExiste(rolRepository, "MEDICO", "Gestiona evaluaciones y programación quirúrgica.");
             crearRolSiNoExiste(rolRepository, "RECEPCIONISTA", "Registra y consulta solicitudes quirúrgicas.");
 
-            if (usuarioRepository.findByNombreUsuarioIgnoreCase(usuarioAdmin).isEmpty()) {
+            if (usuarioRepository.findByNombreUsuarioIgnoreCase(bootstrapAdmin.getUsername()).isEmpty()) {
                 Rol rolAdmin = rolRepository.findByNombreRolIgnoreCase("ADMINISTRADOR")
                         .orElseThrow(() -> new IllegalStateException("No se pudo crear el rol administrador."));
                 Usuario admin = new Usuario();
-                admin.setNombreUsuario(usuarioAdmin.trim().toLowerCase(Locale.ROOT));
-                admin.setCorreo(correoAdmin.trim().toLowerCase(Locale.ROOT));
+                admin.setNombreUsuario(bootstrapAdmin.getUsername().trim().toLowerCase(Locale.ROOT));
+                admin.setCorreo(bootstrapAdmin.getEmail().trim().toLowerCase(Locale.ROOT));
                 admin.setNombres("Administrador");
                 admin.setApellidos("del sistema");
-                admin.setPasswordHash(passwordEncoder.encode(claveAdmin));
+                admin.setPasswordHash(passwordEncoder.encode(bootstrapAdmin.getPassword()));
                 admin.setRol(rolAdmin);
                 admin.setActivo(true);
                 usuarioRepository.save(admin);
