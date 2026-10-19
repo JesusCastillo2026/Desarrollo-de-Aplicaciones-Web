@@ -6,7 +6,7 @@ Portafolio de laboratorios y evaluaciones organizados por semana.
 > ## 📝 EVALUACIÓN — SEMANA 04
 > Esta entrega corresponde a una **evaluación del módulo de Quirófano / Cirugía**. Incluye la solicitud quirúrgica, la evaluación preoperatoria y aprobación, la programación de cirugías y la gestión de los quirófanos necesarios para esa programación.
 >
-> **Entrega:** [Abrir la carpeta de evaluación](Semana04/EVALUACION/)
+> **Entrega:** [Abrir carpeta del proyecto de Quirófano](Semana04/EVALUACION/quirofano-solicitudes-api/)
 
 
 > [!IMPORTANT]
