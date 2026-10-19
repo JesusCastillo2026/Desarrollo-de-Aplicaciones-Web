@@ -61,13 +61,13 @@ Java 17, Spring Boot, Spring Web MVC, Spring Data JPA/Hibernate, MySQL, Thymelea
 
 ## Base de datos y ejecución
 
-1. Inicia Apache (si lo necesitas para phpMyAdmin) y MySQL en XAMPP.
-2. Crea la base de datos `hospital_db` en phpMyAdmin.
-3. Comprueba la URL, usuario y contraseña en `src/main/resources/application.properties`.
-4. En Windows, abre una terminal en esta carpeta y ejecuta `./mvnw.cmd spring-boot:run`.
+1. Inicia MySQL en XAMPP. Apache solo es necesario si quieres abrir phpMyAdmin.
+2. Comprueba la URL, usuario y contraseña en `src/main/resources/application.properties`. La URL tiene `createDatabaseIfNotExist=true`, por lo que la primera conexión crea `hospital_db` si no existe.
+3. El usuario MySQL configurado debe tener permiso para crear bases de datos; en la instalación local estándar de XAMPP se utiliza `root`.
+4. Abre una terminal en esta carpeta y ejecuta `./mvnw.cmd spring-boot:run`.
 5. Visita `http://localhost:8081/web/solicitudes/home`.
 
-Hibernate actualiza el esquema existente con `spring.jpa.hibernate.ddl-auto=update`. La ampliación crea las tablas `roles`, `usuarios` y `auditoria_operaciones` además de las tablas quirúrgicas existentes. También está disponible el SQL aditivo en `database/evaluacion-02-seguridad-auditoria.sql`; no elimina las tablas de Evaluación 1.
+Después de crear la base, Hibernate genera las tablas al iniciar porque está configurado con `spring.jpa.hibernate.ddl-auto=update`. También está disponible el SQL aditivo en `database/evaluacion-02-seguridad-auditoria.sql`. Si eliminas la base completa, se recrearán la estructura y los roles/cuenta iniciales, pero los registros previos de pacientes, solicitudes y cirugías se perderán.
 
 El servicio MySQL del XAMPP usado en esta entrega reporta el motor MariaDB 10.4.32; Hibernate queda configurado con el dialecto MariaDB y el mismo esquema `hospital_db`.
 
