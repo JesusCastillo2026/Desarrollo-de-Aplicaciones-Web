@@ -1,5 +1,7 @@
 # Evaluación 3 — Gestión de pedidos de restaurante
 
+**Asignación individual N.º 4:** Pedidos de restaurante. Microservicios asignados: Cliente, Plato y Pedido. Estudiante: CASTILLO SUMIRE, JESUS JOSE.
+
 Avance implementado hasta el punto 5 de la lista: servicios, paquetes, entidades y persistencia, API REST/reglas y configuración YAML con perfiles `dev` y `prod`. La colección de Postman se ejecutó en Postman Desktop: 28 comprobaciones aprobadas, 0 fallidas y 0 errores. MySQL de XAMPP confirmó las tres bases y sus tablas. Las capturas reales de Postman, XAMPP, phpMyAdmin y VS Code están guardadas en `evidencias/capturas/`. El informe final está en `evidencias/EVALUACION_03_Gestion_Pedidos_Restaurante.pdf`.
 
 ## Objetivo
@@ -87,8 +89,9 @@ Los DTO de entrada validan campos requeridos, formatos de correo, cantidades y p
 - [x] Capturas auténticas de Postman, XAMPP, phpMyAdmin y VS Code integradas en el PDF.
 - [x] PDF con objetivo, arquitectura, flujo, persistencia, pruebas, cinco aprendizajes técnicos y una dificultad con su solución.
 - [ ] Sustentación individual de 5 a 8 minutos, con demostración y respuesta a cambios pequeños en vivo.
-- [ ] Confirmar el dominio requerido por la consigna: esta carpeta documenta pedidos de restaurante; la consigna compartida antes menciona citas médicas y Eureka/API Gateway.
+- [x] Dominio y microservicios confirmados con el PDF individual: Pedidos de restaurante; Cliente, Plato y Pedido.
+- [x] Referencias entre servicios representadas con IDs según la guía individual.
 
-## Observación sobre la consigna
+## Asignación confirmada
 
-La consigna de Canvas compartida en el chat describe un sistema de citas médicas con Eureka Server y API Gateway. Este proyecto implementa gestión de pedidos de restaurante con comunicación REST directa y no incluye Eureka ni API Gateway. Si la evaluación exige literalmente el dominio de citas médicas y esos componentes, todavía se debe adaptar y completar ese alcance antes de considerarlo al 100%.
+El PDF `Evaluacion 03 - D` asigna a CASTILLO SUMIRE, JESUS JOSE el laboratorio individual N.º 4: Pedidos de restaurante, con los microservicios Cliente, Plato y Pedido. Este proyecto corresponde a esa fila. Las referencias remotas se representan con IDs; cada servicio conserva su propia base MySQL.
