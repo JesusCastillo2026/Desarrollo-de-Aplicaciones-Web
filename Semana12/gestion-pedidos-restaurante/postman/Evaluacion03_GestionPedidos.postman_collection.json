@@ -1,0 +1,187 @@
+{
+  "info": {
+    "_postman_id": "694cf4be-a936-4f28-83f9-a51f81176522",
+    "name": "Evaluacion 03 - Gestion de pedidos de restaurante (corregida)",
+    "description": "Coleccion para ejecutar en orden las pruebas CRUD, validaciones y comunicacion REST de Cliente, Plato y Pedido. Requiere los tres servicios activos en localhost:8081, 8082 y 8083. Los registros se eliminan al final de la corrida.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "clienteUrl", "value": "http://localhost:8081" },
+    { "key": "platoUrl", "value": "http://localhost:8082" },
+    { "key": "pedidoUrl", "value": "http://localhost:8083" },
+    { "key": "runId", "value": "" },
+    { "key": "clienteId", "value": "" },
+    { "key": "clienteDocumento", "value": "" },
+    { "key": "plato1Id", "value": "" },
+    { "key": "plato1Codigo", "value": "" },
+    { "key": "plato2Id", "value": "" },
+    { "key": "plato2Codigo", "value": "" },
+    { "key": "pedidoId", "value": "" }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": ["pm.collectionVariables.set('runId', Date.now().toString());"]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "01 - Listar clientes",
+          "request": { "method": "GET", "url": "{{clienteUrl}}/api/clientes" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Lista responde 200', function () { pm.response.to.have.status(200); });"] } }]
+        },
+        {
+          "name": "02 - Crear cliente para pruebas",
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombres\": \"Cliente\",\n  \"apellidos\": \"Postman Evaluacion 3\",\n  \"numeroDocumento\": \"E3-PM-{{runId}}\",\n  \"correo\": \"postman.{{runId}}@example.com\",\n  \"activo\": true\n}" }, "url": "{{clienteUrl}}/api/clientes" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Cliente creado', function () { pm.response.to.have.status(201); });", "const body = pm.response.json();", "pm.collectionVariables.set('clienteId', body.idCliente);", "pm.collectionVariables.set('clienteDocumento', body.numeroDocumento);"] } }]
+        },
+        {
+          "name": "03 - Consultar cliente",
+          "request": { "method": "GET", "url": "{{clienteUrl}}/api/clientes/{{clienteId}}" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Cliente encontrado', function () { pm.response.to.have.status(200); });"] } }]
+        },
+        {
+          "name": "04 - Actualizar cliente",
+          "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombres\": \"Cliente actualizado\",\n  \"apellidos\": \"Postman Evaluacion 3\",\n  \"numeroDocumento\": \"{{clienteDocumento}}\",\n  \"correo\": \"postman.actualizado@example.com\",\n  \"activo\": true\n}" }, "url": "{{clienteUrl}}/api/clientes/{{clienteId}}" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Cliente actualizado', function () { pm.response.to.have.status(200); });"] } }]
+        },
+        {
+          "name": "05 - Rechazar correo invalido",
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombres\": \"Inválido\",\n  \"apellidos\": \"Prueba\",\n  \"numeroDocumento\": \"E3-INVALIDO-{{runId}}\",\n  \"correo\": \"correo-invalido\",\n  \"activo\": true\n}" }, "url": "{{clienteUrl}}/api/clientes" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Validacion de correo devuelve 400', function () { pm.response.to.have.status(400); });"] } }]
+        },
+        {
+          "name": "06 - Rechazar documento duplicado",
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombres\": \"Duplicado\",\n  \"apellidos\": \"Prueba\",\n  \"numeroDocumento\": \"{{clienteDocumento}}\",\n  \"correo\": \"duplicado@example.com\",\n  \"activo\": true\n}" }, "url": "{{clienteUrl}}/api/clientes" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Documento duplicado devuelve 409', function () { pm.response.to.have.status(409); });"] } }]
+        }
+      ]
+    },
+    {
+      "name": "Platos",
+      "item": [
+        {
+          "name": "01 - Listar platos",
+          "request": { "method": "GET", "url": "{{platoUrl}}/api/platos" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Lista responde 200', function () { pm.response.to.have.status(200); });"] } }]
+        },
+        {
+          "name": "02 - Crear plato lomo para prueba",
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"codigo\": \"E3-PM-LOMO-{{runId}}\",\n  \"nombre\": \"Lomo saltado Postman\",\n  \"descripcion\": \"Registro temporal de prueba\",\n  \"precio\": 25.50,\n  \"disponible\": true\n}" }, "url": "{{platoUrl}}/api/platos" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Plato creado', function () { pm.response.to.have.status(201); });", "const body = pm.response.json();", "pm.collectionVariables.set('plato1Id', body.idPlato);", "pm.collectionVariables.set('plato1Codigo', body.codigo);"] } }]
+        },
+        {
+          "name": "03 - Crear bebida para prueba",
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"codigo\": \"E3-PM-BEBIDA-{{runId}}\",\n  \"nombre\": \"Chicha morada Postman\",\n  \"descripcion\": \"Registro temporal de prueba\",\n  \"precio\": 7.50,\n  \"disponible\": true\n}" }, "url": "{{platoUrl}}/api/platos" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Bebida creada', function () { pm.response.to.have.status(201); });", "const body = pm.response.json();", "pm.collectionVariables.set('plato2Id', body.idPlato);", "pm.collectionVariables.set('plato2Codigo', body.codigo);"] } }]
+        },
+        {
+          "name": "04 - Consultar plato",
+          "request": { "method": "GET", "url": "{{platoUrl}}/api/platos/{{plato1Id}}" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Plato encontrado', function () { pm.response.to.have.status(200); });"] } }]
+        },
+        {
+          "name": "05 - Actualizar plato",
+          "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"codigo\": \"{{plato1Codigo}}\",\n  \"nombre\": \"Lomo saltado actualizado\",\n  \"descripcion\": \"Registro temporal de prueba\",\n  \"precio\": 26.00,\n  \"disponible\": true\n}" }, "url": "{{platoUrl}}/api/platos/{{plato1Id}}" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Plato actualizado', function () { pm.response.to.have.status(200); });"] } }]
+        },
+        {
+          "name": "06 - Rechazar precio cero",
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"codigo\": \"E3-PM-INVALIDO-{{runId}}\",\n  \"nombre\": \"Precio inválido\",\n  \"descripcion\": \"\",\n  \"precio\": 0,\n  \"disponible\": true\n}" }, "url": "{{platoUrl}}/api/platos" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Precio inválido devuelve 400', function () { pm.response.to.have.status(400); });"] } }]
+        },
+        {
+          "name": "07 - Rechazar código duplicado",
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"codigo\": \"{{plato1Codigo}}\",\n  \"nombre\": \"Duplicado\",\n  \"descripcion\": \"\",\n  \"precio\": 3.00,\n  \"disponible\": true\n}" }, "url": "{{platoUrl}}/api/platos" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Código duplicado devuelve 409', function () { pm.response.to.have.status(409); });"] } }]
+        }
+      ]
+    },
+    {
+      "name": "Pedidos",
+      "item": [
+        {
+          "name": "01 - Crear pedido con cliente y platos existentes",
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"idCliente\": {{clienteId}},\n  \"estado\": \"REGISTRADO\",\n  \"detalles\": [\n    { \"idPlato\": {{plato1Id}}, \"cantidad\": 2 },\n    { \"idPlato\": {{plato2Id}}, \"cantidad\": 3 }\n  ]\n}" }, "url": "{{pedidoUrl}}/api/pedidos" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Pedido creado', function () { pm.response.to.have.status(201); });", "const body = pm.response.json();", "pm.collectionVariables.set('pedidoId', body.idPedido);", "pm.test('Total calculado correctamente', function () { pm.expect(Number(body.total)).to.eql(74.5); });"] } }]
+        },
+        {
+          "name": "02 - Listar pedidos",
+          "request": { "method": "GET", "url": "{{pedidoUrl}}/api/pedidos" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Lista responde 200', function () { pm.response.to.have.status(200); });"] } }]
+        },
+        {
+          "name": "03 - Consultar pedido y detalles",
+          "request": { "method": "GET", "url": "{{pedidoUrl}}/api/pedidos/{{pedidoId}}" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Pedido con detalles responde 200', function () { pm.response.to.have.status(200); });"] } }]
+        },
+        {
+          "name": "04 - Actualizar estado del pedido",
+          "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"idCliente\": {{clienteId}},\n  \"estado\": \"EN_PREPARACION\",\n  \"detalles\": [\n    { \"idPlato\": {{plato1Id}}, \"cantidad\": 2 },\n    { \"idPlato\": {{plato2Id}}, \"cantidad\": 3 }\n  ]\n}" }, "url": "{{pedidoUrl}}/api/pedidos/{{pedidoId}}" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Pedido actualizado', function () { pm.response.to.have.status(200); });"] } }]
+        },
+        {
+          "name": "05 - Rechazar cliente inexistente",
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"idCliente\": 99999999,\n  \"estado\": \"REGISTRADO\",\n  \"detalles\": [{ \"idPlato\": {{plato1Id}}, \"cantidad\": 1 }]\n}" }, "url": "{{pedidoUrl}}/api/pedidos" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Cliente remoto inexistente devuelve 422', function () { pm.response.to.have.status(422); });"] } }]
+        },
+        {
+          "name": "06 - Rechazar plato inexistente",
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"idCliente\": {{clienteId}},\n  \"estado\": \"REGISTRADO\",\n  \"detalles\": [{ \"idPlato\": 99999999, \"cantidad\": 1 }]\n}" }, "url": "{{pedidoUrl}}/api/pedidos" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Plato remoto inexistente devuelve 422', function () { pm.response.to.have.status(422); });"] } }]
+        },
+        {
+          "name": "07 - Rechazar cantidad cero",
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"idCliente\": {{clienteId}},\n  \"estado\": \"REGISTRADO\",\n  \"detalles\": [{ \"idPlato\": {{plato1Id}}, \"cantidad\": 0 }]\n}" }, "url": "{{pedidoUrl}}/api/pedidos" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Cantidad cero devuelve 400', function () { pm.response.to.have.status(400); });"] } }]
+        },
+        {
+          "name": "08 - Rechazar estado no permitido",
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"idCliente\": {{clienteId}},\n  \"estado\": \"CERRADO\",\n  \"detalles\": [{ \"idPlato\": {{plato1Id}}, \"cantidad\": 1 }]\n}" }, "url": "{{pedidoUrl}}/api/pedidos" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Estado no permitido devuelve 400', function () { pm.response.to.have.status(400); });"] } }]
+        },
+        {
+          "name": "09 - Eliminar pedido de prueba",
+          "request": { "method": "DELETE", "url": "{{pedidoUrl}}/api/pedidos/{{pedidoId}}" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Pedido eliminado', function () { pm.response.to.have.status(204); });"] } }]
+        },
+        {
+          "name": "10 - Confirmar pedido eliminado",
+          "request": { "method": "GET", "url": "{{pedidoUrl}}/api/pedidos/{{pedidoId}}" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Pedido eliminado ya no existe', function () { pm.response.to.have.status(404); });"] } }]
+        }
+      ]
+    },
+    {
+      "name": "Limpieza final",
+      "item": [
+        {
+          "name": "Eliminar cliente temporal",
+          "request": { "method": "DELETE", "url": "{{clienteUrl}}/api/clientes/{{clienteId}}" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Cliente eliminado', function () { pm.response.to.have.status(204); });"] } }]
+        },
+        {
+          "name": "Confirmar cliente eliminado",
+          "request": { "method": "GET", "url": "{{clienteUrl}}/api/clientes/{{clienteId}}" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Cliente ya no existe', function () { pm.response.to.have.status(404); });"] } }]
+        },
+        {
+          "name": "Eliminar plato temporal 1",
+          "request": { "method": "DELETE", "url": "{{platoUrl}}/api/platos/{{plato1Id}}" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Plato eliminado', function () { pm.response.to.have.status(204); });"] } }]
+        },
+        {
+          "name": "Eliminar plato temporal 2",
+          "request": { "method": "DELETE", "url": "{{platoUrl}}/api/platos/{{plato2Id}}" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Bebida eliminada', function () { pm.response.to.have.status(204); });"] } }]
+        }
+      ]
+    }
+  ]
+}

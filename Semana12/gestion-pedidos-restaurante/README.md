@@ -1,6 +1,6 @@
 # Evaluación 3 — Gestión de pedidos de restaurante
 
-Avance implementado hasta el punto 5 de la lista: servicios, paquetes, entidades y persistencia, API REST/reglas y configuración YAML con perfiles `dev` y `prod`. Las pruebas Postman y las evidencias quedan para completar después.
+Avance implementado hasta el punto 5 de la lista: servicios, paquetes, entidades y persistencia, API REST/reglas y configuración YAML con perfiles `dev` y `prod`. La colección de Postman se ejecutó en Postman Desktop: 28 comprobaciones aprobadas, 0 fallidas y 0 errores. MySQL de XAMPP confirmó las tres bases y sus tablas. Las capturas reales de Postman, XAMPP, phpMyAdmin y VS Code están guardadas en `evidencias/capturas/`. El informe final está en `evidencias/EVALUACION_03_Gestion_Pedidos_Restaurante.pdf`.
 
 ## Objetivo
 
@@ -81,5 +81,12 @@ Los DTO de entrada validan campos requeridos, formatos de correo, cantidades y p
 - [x] Entidades JPA, repositorios, persistencia, relación pedido-detalle y cálculo de importes.
 - [x] APIs REST, DTO, validaciones y comprobaciones de referencias remotas.
 - [x] `application.yml` y perfiles `dev`/`prod`.
-- [ ] Pruebas manuales en Postman y casos válidos e inválidos.
-- [ ] Capturas/colección Postman, evidencia SQL, conclusiones y sustentación.
+- [x] Colección de Postman ejecutada: 28 aprobadas, 0 fallidas y 0 errores.
+- [x] Verificación de bases, tablas y registros demo en MariaDB de XAMPP.
+- [x] Colección exportada en `postman/Evaluacion03_GestionPedidos.postman_collection.json`.
+- [x] Capturas auténticas de Postman, XAMPP, phpMyAdmin y VS Code integradas en el PDF.
+- [x] PDF final con objetivo, arquitectura, flujo, persistencia, pruebas y conclusiones.
+
+## Observación sobre la consigna
+
+La consigna de Canvas compartida en el chat describe un sistema de citas médicas con Eureka Server y API Gateway. Este proyecto implementa gestión de pedidos de restaurante con comunicación REST directa y no incluye Eureka ni API Gateway. Si la evaluación exige literalmente el dominio de citas médicas y esos componentes, todavía se debe adaptar y completar ese alcance antes de considerarlo al 100%.
