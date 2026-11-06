@@ -85,7 +85,9 @@ Los DTO de entrada validan campos requeridos, formatos de correo, cantidades y p
 - [x] Verificación de bases, tablas y registros demo en MariaDB de XAMPP.
 - [x] Colección exportada en `postman/Evaluacion03_GestionPedidos.postman_collection.json`.
 - [x] Capturas auténticas de Postman, XAMPP, phpMyAdmin y VS Code integradas en el PDF.
-- [x] PDF final con objetivo, arquitectura, flujo, persistencia, pruebas y conclusiones.
+- [x] PDF con objetivo, arquitectura, flujo, persistencia, pruebas, cinco aprendizajes técnicos y una dificultad con su solución.
+- [ ] Sustentación individual de 5 a 8 minutos, con demostración y respuesta a cambios pequeños en vivo.
+- [ ] Confirmar el dominio requerido por la consigna: esta carpeta documenta pedidos de restaurante; la consigna compartida antes menciona citas médicas y Eureka/API Gateway.
 
 ## Observación sobre la consigna
 

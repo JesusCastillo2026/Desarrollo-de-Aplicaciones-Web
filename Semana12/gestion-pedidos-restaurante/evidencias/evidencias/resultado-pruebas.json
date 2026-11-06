@@ -1,0 +1,253 @@
+{
+  "fecha": "2026-11-06 16:18:44 -05:00",
+  "resultado": "Exitoso",
+  "cantidadPruebas": 21,
+  "checks": [
+    {
+      "prueba": "Cliente demo ya existe",
+      "estado": "OK",
+      "http": 200,
+      "detalle": "Reutilizado"
+    },
+    {
+      "prueba": "Plato demo 1 ya existe",
+      "estado": "OK",
+      "http": 200,
+      "detalle": "Reutilizado"
+    },
+    {
+      "prueba": "Plato demo 2 ya existe",
+      "estado": "OK",
+      "http": 200,
+      "detalle": "Reutilizado"
+    },
+    {
+      "prueba": "GET cliente por ID",
+      "estado": "OK",
+      "http": 200,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "PUT actualizar cliente",
+      "estado": "OK",
+      "http": 200,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "Validar correo inválido",
+      "estado": "OK",
+      "http": 400,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "Validar documento duplicado",
+      "estado": "OK",
+      "http": 409,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "Validar cliente inexistente",
+      "estado": "OK",
+      "http": 404,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "DELETE cliente temporal",
+      "estado": "OK",
+      "http": 204,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "Crear plato temporal CRUD",
+      "estado": "OK",
+      "http": 201,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "GET plato por ID",
+      "estado": "OK",
+      "http": 200,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "PUT actualizar plato",
+      "estado": "OK",
+      "http": 200,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "Validar precio inválido",
+      "estado": "OK",
+      "http": 400,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "Validar código duplicado",
+      "estado": "OK",
+      "http": 409,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "DELETE plato temporal",
+      "estado": "OK",
+      "http": 204,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "POST pedido demo cross-service",
+      "estado": "OK",
+      "http": 201,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "Cálculo de subtotales y total",
+      "estado": "OK",
+      "http": 201,
+      "detalle": "Total esperado S/ 73.5"
+    },
+    {
+      "prueba": "GET pedido con detalles",
+      "estado": "OK",
+      "http": 200,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "PUT estado pedido",
+      "estado": "OK",
+      "http": 200,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "Validar cliente remoto inexistente",
+      "estado": "OK",
+      "http": 422,
+      "detalle": "Respuesta esperada"
+    },
+    {
+      "prueba": "Validar cantidad no positiva",
+      "estado": "OK",
+      "http": 400,
+      "detalle": "Respuesta esperada"
+    }
+  ],
+  "demo": {
+    "cliente": {
+      "idCliente": 1,
+      "nombres": "Jesus",
+      "apellidos": "Castillo Demo",
+      "numeroDocumento": "E3-DEMO-2026",
+      "correo": "jesus.demo@example.com",
+      "activo": true
+    },
+    "platos": [
+      {
+        "idPlato": 1,
+        "codigo": "E3-PL-001",
+        "nombre": "Lomo saltado",
+        "descripcion": "Lomo saltado de demostración",
+        "precio": 25.5,
+        "disponible": true
+      },
+      {
+        "idPlato": 2,
+        "codigo": "E3-PL-002",
+        "nombre": "Chicha morada",
+        "descripcion": "Bebida personal",
+        "precio": 7.5,
+        "disponible": true
+      }
+    ],
+    "pedido": {
+      "idPedido": 1,
+      "fecha": "2026-11-06T15:44:06.2615761",
+      "idCliente": 1,
+      "total": 73.5,
+      "estado": "REGISTRADO",
+      "detalles": [
+        {
+          "idDetalle": 1,
+          "idPlato": 1,
+          "nombrePlato": "Lomo saltado",
+          "cantidad": 2,
+          "precioUnitario": 25.5,
+          "subtotal": 51.0
+        },
+        {
+          "idDetalle": 2,
+          "idPlato": 2,
+          "nombrePlato": "Chicha morada",
+          "cantidad": 3,
+          "precioUnitario": 7.5,
+          "subtotal": 22.5
+        }
+      ]
+    }
+  },
+  "conteos": {
+    "pedidos": 1,
+    "platos": 2,
+    "clientes": 1,
+    "detalle_pedido": 2
+  },
+  "postman": {
+    "coleccion": "Evaluacion 03 - Gestion de pedidos de restaurante (corregida)",
+    "ejecutadaEn": "Postman Desktop",
+    "resultadoVisible": "Completada",
+    "pruebas": 28,
+    "aprobadas": 28,
+    "fallidas": 0,
+    "errores": 0,
+    "nota": "Resultado observado en el Runner de Postman. La colección ejecuta altas, consultas, actualizaciones, validaciones de datos y limpieza de registros temporales."
+  },
+  "baseDatosVerificada": {
+    "motor": "MariaDB de XAMPP",
+    "puerto": 3306,
+    "bases": [
+      "bd_cliente",
+      "bd_plato",
+      "bd_pedido"
+    ],
+    "tablas": {
+      "bd_cliente": [
+        "clientes"
+      ],
+      "bd_plato": [
+        "platos"
+      ],
+      "bd_pedido": [
+        "pedidos",
+        "detalle_pedido"
+      ]
+    },
+    "conteos": {
+      "pedidos": 1,
+      "platos": 2,
+      "clientes": 1
+    }
+  },
+  "evidenciaVisual": {
+    "estado": "Incluida en el PDF",
+    "capturasIncluidas": true,
+    "archivos": [
+      "postman-resumen-28-aprobadas.png",
+      "postman-clientes-platos.png",
+      "postman-platos-pedidos.png",
+      "postman-pedidos-validaciones.png",
+      "postman-limpieza.png",
+      "postman-borrado-platos.png",
+      "xampp-mysql-activo.png",
+      "vscode-proyecto.png",
+      "phpmyadmin-bases.png",
+      "phpmyadmin-bd-cliente.png",
+      "phpmyadmin-bd-plato.png",
+      "phpmyadmin-bd-pedido.png"
+    ]
+  },
+  "observacionConsigna": "La captura de Canvas compartida solicita citas médicas, Eureka Server y API Gateway; este proyecto documenta pedidos de restaurante y no implementa Eureka ni Gateway.",
+  "documentacionComplementaria": {
+    "aprendizajesTecnicos": 5,
+    "dificultadYSolucion": true,
+    "sustentacionIndividual": "Pendiente: realizar exposicion de 5 a 8 minutos",
+    "notaConsigna": "Confirmar si aplica el dominio de citas medicas/Eureka/API Gateway o el proyecto de pedidos de restaurante."
+  }
+}
