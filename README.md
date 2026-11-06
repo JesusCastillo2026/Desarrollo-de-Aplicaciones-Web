@@ -15,6 +15,12 @@ Portafolio de laboratorios y evaluaciones organizados por semana.
 >
 > **Entrega:** [Abrir carpeta de Evaluación 2](Semana08/Evaluaci%C3%B3n%202/)
 
+> [!IMPORTANT]
+> ## 📝 EVALUACIÓN 3 — SEMANA 12
+> Esta evaluación desarrolla una arquitectura de microservicios para gestionar pedidos de restaurante. El avance incluye los servicios Cliente, Plato y Pedido, bases de datos separadas, APIs REST, persistencia JPA y configuración YAML por perfiles.
+>
+> **Entrega:** [Abrir carpeta de Evaluación 3](Semana12/gestion-pedidos-restaurante/)
+
 ## Contenido
 
 | Semana | Trabajo | Objetivo |
@@ -28,6 +34,7 @@ Portafolio de laboratorios y evaluaciones organizados por semana.
 | [Semana 07](Semana07/README.md) | API REST segura — Lab 07 | Autenticar con HTTP Basic, cifrar contraseñas con BCrypt y restringir rutas según roles mediante Spring Security. |
 | [Semana 08](Semana08/README.md) | Laboratorio 08 — pruebas de API y Evaluación 2 | Probar operaciones CRUD de productos y categorías con tests unitarios e integración; integrar seguridad por roles y auditoría en el sistema quirúrgico. |
 | [Semana 09](Semana09/README.md) | Laboratorio 09 — Autenticación JWT | Emitir y validar tokens JWT y restringir endpoints REST según roles con Spring Security. |
+| [Semana 12](Semana12/README.md) | Evaluación 3 — Microservicios de pedidos | Gestionar clientes, platos y pedidos mediante servicios REST y bases de datos independientes. |
 
 Cada carpeta incluye un README con el objetivo, el trabajo realizado y las herramientas utilizadas. El código de los laboratorios está en la carpeta de su semana cuando corresponde.
 
