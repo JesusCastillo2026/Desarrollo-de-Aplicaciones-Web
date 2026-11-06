@@ -243,5 +243,11 @@
       "phpmyadmin-bd-pedido.png"
     ]
   },
-  "observacionConsigna": "La captura de Canvas compartida solicita citas médicas, Eureka Server y API Gateway; este proyecto documenta pedidos de restaurante y no implementa Eureka ni Gateway."
+  "observacionConsigna": "La captura de Canvas compartida solicita citas médicas, Eureka Server y API Gateway; este proyecto documenta pedidos de restaurante y no implementa Eureka ni Gateway.",
+  "documentacionComplementaria": {
+    "aprendizajesTecnicos": 5,
+    "dificultadYSolucion": true,
+    "sustentacionIndividual": "Pendiente: realizar exposicion de 5 a 8 minutos",
+    "notaConsigna": "Confirmar si aplica el dominio de citas medicas/Eureka/API Gateway o el proyecto de pedidos de restaurante."
+  }
 }
