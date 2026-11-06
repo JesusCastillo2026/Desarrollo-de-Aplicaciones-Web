@@ -2,7 +2,7 @@
 
 **Asignación individual N.º 4:** Pedidos de restaurante. Microservicios asignados: Cliente, Plato y Pedido. Estudiante: CASTILLO SUMIRE, JESUS JOSE.
 
-Avance implementado hasta el punto 5 de la lista: servicios, paquetes, entidades y persistencia, API REST/reglas y configuración YAML con perfiles `dev` y `prod`. La colección de Postman se ejecutó en Postman Desktop: 28 comprobaciones aprobadas, 0 fallidas y 0 errores. MySQL de XAMPP confirmó las tres bases y sus tablas. Las capturas reales de Postman, XAMPP, phpMyAdmin y VS Code están guardadas en `evidencias/capturas/`. El informe final está en `evidencias/EVALUACION_03_Gestion_Pedidos_Restaurante.pdf`.
+La implementación corresponde a la asignación individual N.º 4 del PDF de evaluación: Pedidos de restaurante, con los microservicios Cliente, Plato y Pedido. La colección se ejecutó en Postman Desktop y sus 28 aserciones aprobaron (0 fallidas, 0 errores). MySQL de XAMPP confirmó las tres bases y sus tablas. El informe PDF reúne capturas reales de ejecución, Postman, XAMPP, phpMyAdmin y VS Code.
 
 ## Objetivo
 
@@ -83,11 +83,11 @@ Los DTO de entrada validan campos requeridos, formatos de correo, cantidades y p
 - [x] Entidades JPA, repositorios, persistencia, relación pedido-detalle y cálculo de importes.
 - [x] APIs REST, DTO, validaciones y comprobaciones de referencias remotas.
 - [x] `application.yml` y perfiles `dev`/`prod`.
-- [x] Colección de Postman ejecutada: 28 aprobadas, 0 fallidas y 0 errores.
+- [x] Colección ejecutada en Postman Desktop: 28 aserciones aprobadas, 0 fallidas y 0 errores.
 - [x] Verificación de bases, tablas y registros demo en MariaDB de XAMPP.
 - [x] Colección exportada en `postman/Evaluacion03_GestionPedidos.postman_collection.json`.
-- [x] Capturas auténticas de Postman, XAMPP, phpMyAdmin y VS Code integradas en el PDF.
-- [x] PDF con objetivo, arquitectura, flujo, persistencia, pruebas, cinco aprendizajes técnicos y una dificultad con su solución.
+- [x] Capturas auténticas de Postman, XAMPP, phpMyAdmin, VS Code y arranque separado de Cliente, Plato y Pedido integradas en el PDF.
+- [x] Informe PDF con objetivo, arquitectura, diagrama de servicios y bases, flujo, persistencia, código explicado, pruebas, cinco aprendizajes técnicos y una dificultad con su solución.
 - [ ] Sustentación individual de 5 a 8 minutos, con demostración y respuesta a cambios pequeños en vivo.
 - [x] Dominio y microservicios confirmados con el PDF individual: Pedidos de restaurante; Cliente, Plato y Pedido.
 - [x] Referencias entre servicios representadas con IDs según la guía individual.
@@ -95,3 +95,11 @@ Los DTO de entrada validan campos requeridos, formatos de correo, cantidades y p
 ## Asignación confirmada
 
 El PDF `Evaluacion 03 - D` asigna a CASTILLO SUMIRE, JESUS JOSE el laboratorio individual N.º 4: Pedidos de restaurante, con los microservicios Cliente, Plato y Pedido. Este proyecto corresponde a esa fila. Las referencias remotas se representan con IDs; cada servicio conserva su propia base MySQL.
+
+## Entregables
+
+- Código fuente y configuración de los tres microservicios en esta carpeta.
+- Evidencia visual de las bases y tablas de MySQL en `evidencias/capturas/`.
+- Colección y capturas del Runner de Postman en `postman/` y `evidencias/capturas/`.
+- Informe final: `evidencias/EVALUACION_03_Gestion_Pedidos_Restaurante.pdf`.
+- Guion de sustentación de 5 a 8 minutos incluido en el informe. La exposición en vivo queda pendiente de realizarse.

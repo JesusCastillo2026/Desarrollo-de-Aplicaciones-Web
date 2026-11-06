@@ -1,7 +1,7 @@
 {
   "fecha": "2026-11-06 16:18:44 -05:00",
   "resultado": "Exitoso",
-  "cantidadPruebas": 21,
+  "escenariosValidacionDocumentados": 21,
   "checks": [
     {
       "prueba": "Cliente demo ya existe",
@@ -193,6 +193,7 @@
     "coleccion": "Evaluacion 03 - Gestion de pedidos de restaurante (corregida)",
     "ejecutadaEn": "Postman Desktop",
     "resultadoVisible": "Completada",
+    "tipoConteo": "Aserciones automatizadas pm.test del Runner",
     "pruebas": 28,
     "aprobadas": 28,
     "fallidas": 0,
