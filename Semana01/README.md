@@ -1,5 +1,7 @@
 # Semana 01 — Laboratorio 1: Configuración del entorno
 
+**Estado:** Falta realizar el laboratorio. Por ahora, solo está disponible el PDF de referencia en [Documentos](../Documentos/README.md).
+
 ## Objetivo
 
 Preparar el entorno de desarrollo necesario para trabajar con Java y Spring, reconociendo las herramientas, configuraciones y estructura inicial que se utilizarán en los laboratorios del curso.
