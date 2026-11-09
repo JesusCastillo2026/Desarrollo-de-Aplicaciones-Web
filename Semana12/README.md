@@ -1,5 +1,7 @@
 # Semana 12
 
+**Estado:** Evaluación 3 completada.
+
 En esta carpeta se mantienen separados la Evaluación 3 y el laboratorio de clase.
 
 ## Evaluación 3 — Gestión de pedidos de restaurante
