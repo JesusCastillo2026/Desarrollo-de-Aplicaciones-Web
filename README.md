@@ -2,6 +2,8 @@
 
 Portafolio de laboratorios y evaluaciones organizados por semana.
 
+**Documentos y descargas:** [índice de evaluaciones, laboratorios y materiales PDF](Documentos/README.md).
+
 > [!IMPORTANT]
 > ## 📝 EVALUACIÓN — SEMANA 04
 > Esta entrega corresponde a una **evaluación del módulo de Quirófano / Cirugía**. Incluye la solicitud quirúrgica, la evaluación preoperatoria y aprobación, la programación de cirugías y la gestión de los quirófanos necesarios para esa programación.
@@ -25,8 +27,8 @@ Portafolio de laboratorios y evaluaciones organizados por semana.
 
 | Semana | Trabajo | Objetivo |
 |---|---|---|
-| [Semana 01](Semana01/README.md) | Sin entregas registradas | Carpeta preparada para incorporar futuras actividades. |
-| [Semana 02](Semana02/README.md) | Sin entregas registradas | Carpeta preparada para incorporar futuras actividades. |
+| [Semana 01](Semana01/README.md) | Material de clase; sin proyecto registrado | Configuración del entorno de desarrollo. |
+| [Semana 02](Semana02/README.md) | Material de clase; sin proyecto registrado | Inversión de Control y gestión de dependencias. |
 | [Semana 03](Semana03/README.md) | Sin entregas registradas | Carpeta preparada para incorporar futuras actividades. |
 | [Semana 04](Semana04/README.md) | Evaluación: Sistema de Gestión Quirúrgica | Registrar solicitudes quirúrgicas, evaluar y aprobar casos, y programar cirugías con control de disponibilidad. |
 | [Semana 05](Semana05/README.md) | API de productos — Lab 05 | Implementar operaciones CRUD de productos con validación y persistencia relacional. |
@@ -34,7 +36,13 @@ Portafolio de laboratorios y evaluaciones organizados por semana.
 | [Semana 07](Semana07/README.md) | API REST segura — Lab 07 | Autenticar con HTTP Basic, cifrar contraseñas con BCrypt y restringir rutas según roles mediante Spring Security. |
 | [Semana 08](Semana08/README.md) | Laboratorio 08 — pruebas de API y Evaluación 2 | Probar operaciones CRUD de productos y categorías con tests unitarios e integración; integrar seguridad por roles y auditoría en el sistema quirúrgico. |
 | [Semana 09](Semana09/README.md) | Laboratorio 09 — Autenticación JWT | Emitir y validar tokens JWT y restringir endpoints REST según roles con Spring Security. |
+| [Semana 10](Semana10/) | Sin entregas registradas | Carpeta preparada para incorporar futuras actividades. |
+| [Semana 11](Semana11/) | Sin entregas registradas | Carpeta preparada para incorporar futuras actividades. |
 | [Semana 12](Semana12/README.md) | Evaluación 3 — Pedidos de restaurante | Gestionar clientes, platos y pedidos con tres microservicios REST, persistencia independiente y validación de referencias. |
+| [Semana 13](Semana13/) | Sin entregas registradas | Carpeta preparada para incorporar futuras actividades. |
+| [Semana 14](Semana14/) | Sin entregas registradas | Carpeta preparada para incorporar futuras actividades. |
+| [Semana 15](Semana15/) | Sin entregas registradas | Carpeta preparada para incorporar futuras actividades. |
+| [Semana 16](Semana16/) | Sin entregas registradas | Carpeta preparada para incorporar futuras actividades. |
 
-Cada carpeta incluye un README con el objetivo, el trabajo realizado y las herramientas utilizadas. El código de los laboratorios está en la carpeta de su semana cuando corresponde.
+Las carpetas conservan el código de los laboratorios y las evaluaciones ya realizados. El índice [Documentos](Documentos/README.md) reúne los PDF y los organiza por evaluación, laboratorio y semana.
 
