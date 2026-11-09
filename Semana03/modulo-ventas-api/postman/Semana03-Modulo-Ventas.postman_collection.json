@@ -1,0 +1,32 @@
+{
+  "info": {
+    "_postman_id": "a3e4f514-7835-4bc6-b2a5-6bd98fd36a03",
+    "name": "Semana 03 - Módulo de Ventas",
+    "description": "Pruebas CRUD de productos y ventas. Importar en Postman y ejecutar en orden con la API levantada en localhost:8080.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:8080"},
+    {"key": "productoId", "value": "1"},
+    {"key": "productoVentaId", "value": "1"},
+    {"key": "categoriaId", "value": "1"},
+    {"key": "clienteId", "value": "1"},
+    {"key": "empleadoId", "value": "1"},
+    {"key": "ventaId", "value": "1"}
+  ],
+  "item": [
+    {"name": "Productos", "item": [
+      {"name": "01 - Listar productos", "request": {"method": "GET", "url": "{{baseUrl}}/api/productos"}, "event": [{"listen":"test","script":{"exec":["pm.test('Lista productos: HTTP 200', () => pm.response.to.have.status(200));","pm.test('Respuesta es una lista', () => pm.expect(pm.response.json()).to.be.an('array'));"],"type":"text/javascript"}}]},
+      {"name": "02 - Crear producto", "request": {"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"nombre\": \"Producto de prueba\",\n  \"precio\": 19.90,\n  \"stock\": 15,\n  \"categoriaId\": {{categoriaId}}\n}"},"url":"{{baseUrl}}/api/productos"},"event":[{"listen":"test","script":{"exec":["pm.test('Creación: HTTP 201', () => pm.response.to.have.status(201));","const body = pm.response.json();","pm.collectionVariables.set('productoId', body.id);","pm.test('Devuelve identificador', () => pm.expect(body.id).to.exist);"],"type":"text/javascript"}}]},
+      {"name":"03 - Consultar producto creado","request":{"method":"GET","url":"{{baseUrl}}/api/productos/{{productoId}}"},"event":[{"listen":"test","script":{"exec":["pm.test('Consulta: HTTP 200', () => pm.response.to.have.status(200));","pm.test('Devuelve el producto creado', () => pm.expect(pm.response.json().nombre).to.eql('Producto de prueba'));"],"type":"text/javascript"}}]},
+      {"name":"04 - Actualizar producto","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"nombre\": \"Producto actualizado\",\n  \"precio\": 24.50,\n  \"stock\": 20,\n  \"categoriaId\": {{categoriaId}}\n}"},"url":"{{baseUrl}}/api/productos/{{productoId}}"},"event":[{"listen":"test","script":{"exec":["pm.test('Actualización: HTTP 200', () => pm.response.to.have.status(200));","pm.test('Cambió el nombre', () => pm.expect(pm.response.json().nombre).to.eql('Producto actualizado'));"],"type":"text/javascript"}}]},
+      {"name":"05 - Rechazar precio inválido","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"nombre\": \"Precio inválido\",\n  \"precio\": 0,\n  \"stock\": 1,\n  \"categoriaId\": {{categoriaId}}\n}"},"url":"{{baseUrl}}/api/productos"},"event":[{"listen":"test","script":{"exec":["pm.test('Validación de precio: HTTP 400', () => pm.response.to.have.status(400));"],"type":"text/javascript"}}]},
+      {"name":"06 - Eliminar producto de prueba","request":{"method":"DELETE","url":"{{baseUrl}}/api/productos/{{productoId}}"},"event":[{"listen":"test","script":{"exec":["pm.test('Eliminación: HTTP 204', () => pm.response.to.have.status(204));"],"type":"text/javascript"}}]}
+    ]},
+    {"name":"Ventas", "item":[
+      {"name":"01 - Listar ventas","request":{"method":"GET","url":"{{baseUrl}}/api/ventas"},"event":[{"listen":"test","script":{"exec":["pm.test('Lista ventas: HTTP 200', () => pm.response.to.have.status(200));"],"type":"text/javascript"}}]},
+      {"name":"02 - Registrar venta con producto existente","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"clienteId\": {{clienteId}},\n  \"empleadoId\": {{empleadoId}},\n  \"estado\": \"REGISTRADA\",\n  \"detalles\": [{\"productoId\": {{productoVentaId}}, \"cantidad\": 1}]\n}"},"url":"{{baseUrl}}/api/ventas"},"event":[{"listen":"test","script":{"exec":["pm.test('Registro de venta: HTTP 201', () => pm.response.to.have.status(201));","const body = pm.response.json();","pm.collectionVariables.set('ventaId', body.id);","pm.test('Venta incluye detalle y total', () => { pm.expect(body.detalles).to.be.an('array').that.is.not.empty; pm.expect(body.total).to.exist; });"],"type":"text/javascript"}}]},
+      {"name":"03 - Consultar venta","request":{"method":"GET","url":"{{baseUrl}}/api/ventas/{{ventaId}}"},"event":[{"listen":"test","script":{"exec":["pm.test('Consulta venta: HTTP 200', () => pm.response.to.have.status(200));"],"type":"text/javascript"}}]}
+    ]}
+  ]
+}
