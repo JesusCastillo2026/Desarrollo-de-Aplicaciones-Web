@@ -1,5 +1,7 @@
 # Semana 04 — Evaluación de Gestión Quirúrgica
 
+**Estado:** Laboratorio 4 y Evaluación 1 completados.
+
 ## Objetivo
 
 Desarrollar el módulo de Quirófano / Cirugía de un sistema hospitalario, gestionando el flujo desde la solicitud quirúrgica hasta la evaluación preoperatoria, la aprobación y la programación de la intervención.
