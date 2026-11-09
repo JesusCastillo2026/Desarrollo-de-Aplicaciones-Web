@@ -40,4 +40,4 @@ Java 17, Spring Boot, Spring Web MVC, Spring Data JPA con Hibernate, MySQL en XA
 
 ## Proyecto
 
-El código, instrucciones de ejecución, entidades, rutas REST y vistas están documentados en [Evaluación](EVALUACION/README.md) y en el [README de la aplicación](EVALUACION/quirofano-solicitudes-api/README.md).
+El código, instrucciones de ejecución, entidades, rutas REST y vistas están documentados en [Evaluación 1](Evaluaci%C3%B3n%201/README.md) y en el [README de la aplicación](Evaluaci%C3%B3n%201/quirofano-solicitudes-api/README.md).
