@@ -1,0 +1,1 @@
+package com.tecsup.producto.repository; import com.tecsup.producto.model.Producto; import org.springframework.data.jpa.repository.JpaRepository; public interface ProductoRepository extends JpaRepository<Producto,Long>{}

@@ -1,0 +1,1 @@
+package com.tecsup.cita.repository;import com.tecsup.cita.model.Cita;import org.springframework.data.jpa.repository.JpaRepository;public interface CitaRepository extends JpaRepository<Cita,Long>{}

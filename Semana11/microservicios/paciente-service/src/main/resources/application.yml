@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: paciente-service
+  profiles:
+    active: ${PROFILE_ACTIVE:dev}

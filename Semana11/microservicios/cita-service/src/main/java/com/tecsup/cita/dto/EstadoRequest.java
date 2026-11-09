@@ -1,0 +1,1 @@
+package com.tecsup.cita.dto;import jakarta.validation.constraints.*;public record EstadoRequest(@NotBlank @Pattern(regexp="PROGRAMADA|CONFIRMADA|ATENDIDA|CANCELADA")String estado){}

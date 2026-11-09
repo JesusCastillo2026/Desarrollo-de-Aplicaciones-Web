@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: medico-service
+  profiles:
+    active: ${PROFILE_ACTIVE:dev}

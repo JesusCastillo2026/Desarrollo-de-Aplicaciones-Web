@@ -1,0 +1,1 @@
+package com.tecsup.cita.dto;import jakarta.validation.constraints.*;import java.time.LocalDate;import java.time.LocalTime;public record CitaRequest(@NotNull LocalDate fecha,@NotNull LocalTime hora,@NotNull @Positive Long idPaciente,@NotNull @Positive Long idMedico,@Size(max=300)String motivo){}

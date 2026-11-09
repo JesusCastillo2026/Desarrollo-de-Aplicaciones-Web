@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: cita-service
+  profiles:
+    active: ${PROFILE_ACTIVE:dev}
