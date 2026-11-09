@@ -21,7 +21,7 @@ Aplicar programación orientada a aspectos (AOP) para auditar las operaciones de
 - Se añadieron excepciones específicas y manejadores globales para esas respuestas.
 - Se conserva la auditoría AOP y la inyección por constructor en los servicios y aspectos.
 
-Los informes del laboratorio documentan ambas etapas y sus evidencias de Postman y base de datos.
+El informe consolidado del laboratorio, con las dos etapas y sus evidencias, está en [Semana 6.pdf](../Documentos/Laboratorios/Semana%206/Semana%206.pdf).
 
 ## Herramientas
 
