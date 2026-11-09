@@ -1,6 +1,6 @@
 # Documentos del curso
 
-Los PDF se organizan por semana y actividad. Las evaluaciones tienen una carpeta propia; los informes de laboratorio están dentro de `Laboratorios`, en la carpeta de su semana.
+Documentos del curso organizados por semana y actividad. Las evaluaciones tienen una carpeta propia; los informes PDF de los laboratorios están dentro de `Laboratorios`, en la carpeta de su semana.
 
 <table>
   <thead>
