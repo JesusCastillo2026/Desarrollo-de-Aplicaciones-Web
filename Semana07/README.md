@@ -1,5 +1,7 @@
 # Semana 07 — Laboratorio 07: seguridad en una API REST
 
+**Estado:** Laboratorio 7 completado.
+
 ## Objetivo
 
 Proteger una API REST con Spring Security, autenticación HTTP Basic y autorización por roles. Los usuarios y roles se guardan en MySQL, y las contraseñas se cifran con BCrypt.
