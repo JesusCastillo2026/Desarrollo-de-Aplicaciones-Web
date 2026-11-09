@@ -1,6 +1,6 @@
 # Semana 12
 
-**Estado:** Laboratorio 12 implementado y Evaluación 3 completada.
+**Estado:** Laboratorio y Evaluación 3 de la Semana 12 completados.
 
 En esta carpeta se mantienen separados la Evaluación 3 y el laboratorio de clase.
 
