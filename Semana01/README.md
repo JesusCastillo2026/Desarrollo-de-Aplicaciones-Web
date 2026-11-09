@@ -1,10 +1,11 @@
-# Semana 01
+# Semana 01 — Laboratorio 1: Configuración del entorno
 
 ## Objetivo
-No hay actividades o entregas registradas para esta semana en la organización indicada.
 
-## Cómo se logró
-La carpeta queda preparada para agregar el trabajo cuando esté disponible.
+Preparar el entorno de desarrollo necesario para trabajar con Java y Spring, reconociendo las herramientas, configuraciones y estructura inicial que se utilizarán en los laboratorios del curso.
 
-## Herramientas
-No se registran herramientas porque no se indicó un proyecto.
+## Material del laboratorio
+
+El PDF de la semana documenta la configuración del entorno de desarrollo y sirve como guía de instalación y puesta a punto.
+
+[Consultar el PDF del Laboratorio 1](../Documentos/Laboratorios/Semana%201/Semana%201.pdf).

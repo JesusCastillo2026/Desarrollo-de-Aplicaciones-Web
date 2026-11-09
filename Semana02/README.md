@@ -1,10 +1,11 @@
-# Semana 02
+# Semana 02 — Laboratorio 2: Inversión de Control y dependencias
 
 ## Objetivo
-No hay actividades o entregas registradas para esta semana en la organización indicada.
 
-## Cómo se logró
-La carpeta queda preparada para agregar el trabajo cuando esté disponible.
+Entender cómo Spring controla la creación y administración de componentes y aplicar inyección de dependencias para conectar las partes de una aplicación con menor acoplamiento.
 
-## Herramientas
-No se registran herramientas porque no se indicó un proyecto.
+## Material del laboratorio
+
+El PDF de la semana desarrolla los conceptos de inversión de control y gestión de dependencias que sirven de base para la arquitectura usada en los siguientes trabajos.
+
+[Consultar el PDF del Laboratorio 2](../Documentos/Laboratorios/Semana%202/Semana%202.pdf).

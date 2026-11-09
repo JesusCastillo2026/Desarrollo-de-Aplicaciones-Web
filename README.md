@@ -5,7 +5,7 @@ Portafolio de laboratorios y evaluaciones organizados por semana.
 **Documentos y descargas:** [índice de evaluaciones, laboratorios y materiales PDF](Documentos/README.md).
 
 > [!IMPORTANT]
-> ## 📝 EVALUACIÓN — SEMANA 04
+> ## 📝 EVALUACIÓN 1 — SEMANA 04
 > Esta entrega corresponde a una **evaluación del módulo de Quirófano / Cirugía**. Incluye la solicitud quirúrgica, la evaluación preoperatoria y aprobación, la programación de cirugías y la gestión de los quirófanos necesarios para esa programación.
 >
 > **Entrega:** [Abrir carpeta de Evaluación 1](Semana04/Evaluaci%C3%B3n%201/quirofano-solicitudes-api/)
@@ -27,14 +27,14 @@ Portafolio de laboratorios y evaluaciones organizados por semana.
 
 | Semana | Trabajo | Objetivo |
 |---|---|---|
-| [Semana 01](Semana01/README.md) | Material de clase; sin proyecto registrado | Configuración del entorno de desarrollo. |
-| [Semana 02](Semana02/README.md) | Material de clase; sin proyecto registrado | Inversión de Control y gestión de dependencias. |
+| [Semana 01](Semana01/README.md) | Laboratorio 1 — Configuración del entorno | Preparar las herramientas y el entorno de desarrollo Java para crear y ejecutar aplicaciones, verificando la instalación y configuración inicial del proyecto. |
+| [Semana 02](Semana02/README.md) | Laboratorio 2 — IoC e inyección de dependencias | Comprender cómo Spring administra los objetos, aplicar inversión de control e inyección de dependencias y organizar componentes para reducir el acoplamiento. |
 | [Semana 03](Semana03/README.md) | Sin entregas registradas | Carpeta preparada para incorporar futuras actividades. |
-| [Semana 04](Semana04/README.md) | Evaluación: Sistema de Gestión Quirúrgica | Registrar solicitudes quirúrgicas, evaluar y aprobar casos, y programar cirugías con control de disponibilidad. |
+| [Semana 04](Semana04/README.md) | Laboratorio 4 y Evaluación 1 — Sistema de Gestión Quirúrgica | Revisar persistencia con JPA e Hibernate en el laboratorio. En la evaluación se implementó el flujo quirúrgico: solicitudes, evaluación preoperatoria y aprobación, programación de intervenciones y gestión de quirófanos con disponibilidad. |
 | [Semana 05](Semana05/README.md) | API de productos — Lab 05 | Implementar operaciones CRUD de productos con validación y persistencia relacional. |
 | [Semana 06](Semana06/README.md) | API de productos — Lab 06 | Incorporar auditoría transversal de operaciones usando programación orientada a aspectos (AOP). |
 | [Semana 07](Semana07/README.md) | API REST segura — Lab 07 | Autenticar con HTTP Basic, cifrar contraseñas con BCrypt y restringir rutas según roles mediante Spring Security. |
-| [Semana 08](Semana08/README.md) | Laboratorio 08 — pruebas de API y Evaluación 2 | Probar operaciones CRUD de productos y categorías con tests unitarios e integración; integrar seguridad por roles y auditoría en el sistema quirúrgico. |
+| [Semana 08](Semana08/README.md) | Laboratorio 8 y Evaluación 2 — Sistema de Gestión Quirúrgica | Implementar pruebas unitarias y de integración para productos y categorías. La evaluación amplía el sistema quirúrgico con usuarios, roles, autenticación y autorización con Spring Security, auditoría AOP y administración de cuentas. |
 | [Semana 09](Semana09/README.md) | Laboratorio 09 — Autenticación JWT | Emitir y validar tokens JWT y restringir endpoints REST según roles con Spring Security. |
 | [Semana 10](Semana10/) | Sin entregas registradas | Carpeta preparada para incorporar futuras actividades. |
 | [Semana 11](Semana11/) | Sin entregas registradas | Carpeta preparada para incorporar futuras actividades. |
