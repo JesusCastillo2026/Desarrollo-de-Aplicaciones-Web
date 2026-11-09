@@ -1,0 +1,9 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {"type":"java","name":"Empleados - DEV","request":"launch","mainClass":"com.tecsup.empleados.EmpleadoApplication","projectName":"gestion-empleados-api","env":{"PROFILE_ACTIVE":"dev","SERVER_PORT":"8080","DB_URL":"jdbc:mysql://localhost:3306/empleados_dev?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC","DB_USER":"root","DB_PASSWORD":""}},
+    {"type":"java","name":"Empleados - QA","request":"launch","mainClass":"com.tecsup.empleados.EmpleadoApplication","projectName":"gestion-empleados-api","env":{"PROFILE_ACTIVE":"qa","SERVER_PORT":"8082","DB_URL":"jdbc:mysql://localhost:3306/empleados_qa?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC","DB_USER":"root","DB_PASSWORD":""}},
+    {"type":"java","name":"Empleados - TEST","request":"launch","mainClass":"com.tecsup.empleados.EmpleadoApplication","projectName":"gestion-empleados-api","env":{"PROFILE_ACTIVE":"test","SERVER_PORT":"8084","DB_URL":"jdbc:mysql://localhost:3306/empleados_test?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC","DB_USER":"root","DB_PASSWORD":""}},
+    {"type":"java","name":"Empleados - PROD","request":"launch","mainClass":"com.tecsup.empleados.EmpleadoApplication","projectName":"gestion-empleados-api","env":{"PROFILE_ACTIVE":"prod","SERVER_PORT":"8086","DB_URL":"jdbc:mysql://localhost:3306/empleados_prod?useSSL=false&serverTimezone=UTC","DB_USER":"root","DB_PASSWORD":""}}
+  ]
+}

@@ -1,0 +1,13 @@
+CREATE DATABASE IF NOT EXISTS productos_dev;
+CREATE DATABASE IF NOT EXISTS productos_qa;
+CREATE DATABASE IF NOT EXISTS productos_test;
+CREATE DATABASE IF NOT EXISTS productos_prod;
+
+USE productos_prod;
+CREATE TABLE IF NOT EXISTS producto (
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(255),
+  precio DOUBLE NOT NULL,
+  stock INT NOT NULL,
+  categoria VARCHAR(255)
+);

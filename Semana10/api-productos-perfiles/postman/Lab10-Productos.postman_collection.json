@@ -1,0 +1,14 @@
+{
+  "info": {"name":"Laboratorio 10 - API Productos por perfil","schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"},
+  "variable": [{"key":"baseUrl","value":"http://localhost:8080"},{"key":"productoId","value":"1"}],
+  "item": [
+    {"name":"Configuración activa","request":{"method":"GET","url":"{{baseUrl}}/config"},"event":[{"listen":"test","script":{"type":"text/javascript","exec":["pm.test('Configuración accesible', () => pm.response.to.have.status(200));","pm.test('Respuesta informa perfil y BD', () => { const r=pm.response.json(); pm.expect(r.perfil).to.exist; pm.expect(r.baseDatos).to.exist; });"]}}]},
+    {"name":"Productos","item":[
+      {"name":"01 - Listar","request":{"method":"GET","url":"{{baseUrl}}/api/productos"},"event":[{"listen":"test","script":{"type":"text/javascript","exec":["pm.test('Lista: HTTP 200', () => pm.response.to.have.status(200));"]}}]},
+      {"name":"02 - Crear","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"nombre\": \"Teclado de prueba\",\n  \"precio\": 45.90,\n  \"stock\": 12,\n  \"categoria\": \"Accesorios\"\n}"},"url":"{{baseUrl}}/api/productos"},"event":[{"listen":"test","script":{"type":"text/javascript","exec":["pm.test('Creación: HTTP 201', () => pm.response.to.have.status(201));","pm.collectionVariables.set('productoId', pm.response.json().id);"]}}]},
+      {"name":"03 - Consultar","request":{"method":"GET","url":"{{baseUrl}}/api/productos/{{productoId}}"},"event":[{"listen":"test","script":{"type":"text/javascript","exec":["pm.test('Consulta: HTTP 200', () => pm.response.to.have.status(200));"]}}]},
+      {"name":"04 - Actualizar","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"nombre\": \"Teclado actualizado\",\n  \"precio\": 49.90,\n  \"stock\": 15,\n  \"categoria\": \"Accesorios\"\n}"},"url":"{{baseUrl}}/api/productos/{{productoId}}"},"event":[{"listen":"test","script":{"type":"text/javascript","exec":["pm.test('Actualización: HTTP 200', () => pm.response.to.have.status(200));"]}}]},
+      {"name":"05 - Eliminar","request":{"method":"DELETE","url":"{{baseUrl}}/api/productos/{{productoId}}"},"event":[{"listen":"test","script":{"type":"text/javascript","exec":["pm.test('Eliminación: HTTP 200', () => pm.response.to.have.status(200));"]}}]}
+    ]}
+  ]
+}

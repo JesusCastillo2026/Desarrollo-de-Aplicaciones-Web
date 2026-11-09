@@ -1,0 +1,17 @@
+{
+  "info":{"name":"Laboratorio 10 - CRUD de empleados y ambientes","schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"},
+  "variable":[{"key":"baseUrl","value":"http://localhost:8080"},{"key":"empleadoId","value":"1"}],
+  "item":[
+    {"name":"Ambiente","item":[
+      {"name":"01 - Consultar configuración activa","request":{"method":"GET","url":"{{baseUrl}}/configuracion"},"event":[{"listen":"test","script":{"type":"text/javascript","exec":["pm.test('Configuración: HTTP 200', () => pm.response.to.have.status(200));","const c=pm.response.json();","pm.test('Incluye ambiente, perfil, puerto y base', () => { ['ambiente','perfil','puerto','baseDatos'].forEach(k => pm.expect(c[k]).to.exist); });"]}}]}
+    ]},
+    {"name":"CRUD Empleados","item":[
+      {"name":"01 - Listar empleados","request":{"method":"GET","url":"{{baseUrl}}/empleados"},"event":[{"listen":"test","script":{"type":"text/javascript","exec":["pm.test('Lista: HTTP 200', () => pm.response.to.have.status(200));","pm.test('Respuesta es una lista', () => pm.expect(pm.response.json()).to.be.an('array'));" ]}}]},
+      {"name":"02 - Registrar empleado","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"nombres\": \"Ana\",\n  \"apellidos\": \"Torres\",\n  \"email\": \"ana.torres@example.com\",\n  \"sueldo\": 2500.00\n}"},"url":"{{baseUrl}}/empleados"},"event":[{"listen":"test","script":{"type":"text/javascript","exec":["pm.test('Alta: HTTP 201', () => pm.response.to.have.status(201));","pm.collectionVariables.set('empleadoId', pm.response.json().id);"]}}]},
+      {"name":"03 - Consultar por ID","request":{"method":"GET","url":"{{baseUrl}}/empleados/{{empleadoId}}"},"event":[{"listen":"test","script":{"type":"text/javascript","exec":["pm.test('Consulta: HTTP 200', () => pm.response.to.have.status(200));"]}}]},
+      {"name":"04 - Actualizar empleado","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"nombres\": \"Ana María\",\n  \"apellidos\": \"Torres\",\n  \"email\": \"ana.torres@example.com\",\n  \"sueldo\": 2750.00\n}"},"url":"{{baseUrl}}/empleados/{{empleadoId}}"},"event":[{"listen":"test","script":{"type":"text/javascript","exec":["pm.test('Actualización: HTTP 200', () => pm.response.to.have.status(200));"]}}]},
+      {"name":"05 - Rechazar email inválido","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"nombres\": \"Dato\",\n  \"apellidos\": \"Incorrecto\",\n  \"email\": \"no-es-email\",\n  \"sueldo\": 1000.00\n}"},"url":"{{baseUrl}}/empleados"},"event":[{"listen":"test","script":{"type":"text/javascript","exec":["pm.test('Validación: HTTP 400', () => pm.response.to.have.status(400));"]}}]},
+      {"name":"06 - Eliminar empleado","request":{"method":"DELETE","url":"{{baseUrl}}/empleados/{{empleadoId}}"},"event":[{"listen":"test","script":{"type":"text/javascript","exec":["pm.test('Eliminación: HTTP 204', () => pm.response.to.have.status(204));"]}}]}
+    ]}
+  ]
+}
