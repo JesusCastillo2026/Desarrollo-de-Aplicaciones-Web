@@ -1,5 +1,7 @@
 # Semana 02 — Laboratorio 2: Inversión de Control y dependencias
 
+**Estado:** Falta realizar el laboratorio. Por ahora, solo está disponible el PDF de referencia en [Documentos](../Documentos/README.md).
+
 ## Objetivo
 
 Entender cómo Spring controla la creación y administración de componentes y aplicar inyección de dependencias para conectar las partes de una aplicación con menor acoplamiento.
