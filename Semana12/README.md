@@ -1,6 +1,6 @@
 # Semana 12
 
-**Estado:** Evaluación 3 completada.
+**Estado:** Laboratorio 12 implementado y Evaluación 3 completada.
 
 En esta carpeta se mantienen separados la Evaluación 3 y el laboratorio de clase.
 
@@ -20,6 +20,11 @@ Asignación individual N.º 4: microservicios **Cliente, Plato y Pedido**, a nom
 
 El informe incluye cinco aprendizajes técnicos, una dificultad y su solución, y una guía para la sustentación individual de 5 a 8 minutos. La exposición en vivo queda pendiente de realizarse.
 
-## Laboratorio de la semana 12
+## Laboratorio 12 — Comunicación entre servicios
 
-Se mantendrá separado de la evaluación y se incorporará aquí cuando corresponda.
+Proyecto independiente con Eureka Server, servicios de categoría, cliente, producto y pedido, comunicación REST mediante OpenFeign, bases de datos separadas y colección de Postman preparada. La compilación Maven de los cinco módulos se verificó correctamente; las pruebas HTTP quedan pendientes de ejecutar con MySQL activo.
+
+- **Código y guía de ejecución:** [Abrir Laboratorio 12](Laboratorio%2012/README.md)
+- **PDF del laboratorio:** [Semana 12.pdf](../Documentos/Laboratorios/Semana%2012/Semana%2012.pdf)
+
+La carpeta del laboratorio contiene el proyecto y sus instrucciones. La evaluación 3 permanece en su carpeta independiente.

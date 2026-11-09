@@ -1,0 +1,773 @@
+{
+  "info": {
+    "name": "Laboratorio 12 - Eureka y OpenFeign",
+    "description": "Pruebas secuenciales para registrar servicios, validar Feign en Producto y Pedido, y comprobar validaciones. Requiere iniciar Eureka y los cuatro servicios de tienda con MySQL disponible.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if (!pm.collectionVariables.get('testDni')) { pm.collectionVariables.set('testDni', String(Date.now()).slice(-8)); }"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "categoriaId",
+      "value": ""
+    },
+    {
+      "key": "clienteId",
+      "value": ""
+    },
+    {
+      "key": "productoId",
+      "value": ""
+    },
+    {
+      "key": "pedidoId",
+      "value": ""
+    },
+    {
+      "key": "testDni",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "01 - Verificar Eureka",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8761/eureka/apps",
+          "host": [
+            "localhost:8761"
+          ],
+          "path": [
+            "eureka",
+            "apps"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"01 - Verificar Eureka: HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.expect(pm.response.text()).to.include('applications');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 - Listar categorías",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/categorias",
+          "host": [
+            "localhost:8082"
+          ],
+          "path": [
+            "api",
+            "categorias"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"02 - Listar categorías: HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.expect(pm.response.json()).to.be.an('array');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 - Registrar categoría",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/categorias",
+          "host": [
+            "localhost:8082"
+          ],
+          "path": [
+            "api",
+            "categorias"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombre\":\"Tecnología\",\"estado\":\"ACTIVO\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"03 - Registrar categoría: HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "const d=pm.response.json(); pm.expect(d.nombre).to.eql('Tecnología'); pm.collectionVariables.set('categoriaId', d.id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 - Registrar cliente",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/clientes",
+          "host": [
+            "localhost:8081"
+          ],
+          "path": [
+            "api",
+            "clientes"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombre\":\"Carlos\",\"apellidos\":\"Ramírez\",\"direccion\":\"Lima\",\"telefono\":\"999999999\",\"nroDni\":\"{{testDni}}\",\"estado\":\"ACTIVO\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"04 - Registrar cliente: HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "const d=pm.response.json(); pm.collectionVariables.set('clienteId', d.id); pm.expect(d.nroDni).to.match(/^\\d{8}$/);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 - Consultar cliente",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/clientes/{{clienteId}}",
+          "host": [
+            "localhost:8081"
+          ],
+          "path": [
+            "api",
+            "clientes",
+            "{{clienteId}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"05 - Consultar cliente: HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.expect(pm.response.json().id).to.eql(Number(pm.collectionVariables.get('clienteId')));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 - Registrar producto con categoría remota",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/productos",
+          "host": [
+            "localhost:8083"
+          ],
+          "path": [
+            "api",
+            "productos"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombre\":\"Laptop\",\"precio\":2500,\"stock\":10,\"categoriaId\":{{categoriaId}}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"06 - Registrar producto con categoría remota: HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "const d=pm.response.json(); pm.collectionVariables.set('productoId', d.id); pm.expect(d.categoria.id).to.eql(Number(pm.collectionVariables.get('categoriaId')));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 - Consultar producto con categoría",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/productos/{{productoId}}",
+          "host": [
+            "localhost:8083"
+          ],
+          "path": [
+            "api",
+            "productos",
+            "{{productoId}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"07 - Consultar producto con categoría: HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "const d=pm.response.json(); pm.expect(d.categoria.nombre).to.eql('Tecnología');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 - Registrar pedido validando cliente y producto",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8084/api/pedidos",
+          "host": [
+            "localhost:8084"
+          ],
+          "path": [
+            "api",
+            "pedidos"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"fecha\":\"2026-11-09\",\"idCliente\":{{clienteId}},\"detalles\":[{\"idProducto\":{{productoId}},\"cantidad\":2}]}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"08 - Registrar pedido validando cliente y producto: HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "const d=pm.response.json(); pm.collectionVariables.set('pedidoId', d.id); pm.expect(d.cliente.id).to.eql(Number(pm.collectionVariables.get('clienteId'))); pm.expect(d.detalles[0].producto.id).to.eql(Number(pm.collectionVariables.get('productoId'))); pm.expect(d.total).to.eql(5000);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "09 - Consultar pedido enriquecido por Feign",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8084/api/pedidos/{{pedidoId}}",
+          "host": [
+            "localhost:8084"
+          ],
+          "path": [
+            "api",
+            "pedidos",
+            "{{pedidoId}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"09 - Consultar pedido enriquecido por Feign: HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "const d=pm.response.json(); pm.expect(d.cliente.nombre).to.eql('Carlos'); pm.expect(d.detalles[0].producto.nombre).to.eql('Laptop');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "10 - Listar pedidos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8084/api/pedidos",
+          "host": [
+            "localhost:8084"
+          ],
+          "path": [
+            "api",
+            "pedidos"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"10 - Listar pedidos: HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.expect(pm.response.json()).to.be.an('array');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "11 - Cambiar pedido a atendido",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8084/api/pedidos/{{pedidoId}}/estado",
+          "host": [
+            "localhost:8084"
+          ],
+          "path": [
+            "api",
+            "pedidos",
+            "{{pedidoId}}",
+            "estado"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"estado\":\"ATENDIDO\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"11 - Cambiar pedido a atendido: HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.expect(pm.response.json().estado).to.eql('ATENDIDO');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "12 - Rechazar DNI de longitud incorrecta",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/clientes",
+          "host": [
+            "localhost:8081"
+          ],
+          "path": [
+            "api",
+            "clientes"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombre\":\"Prueba\",\"apellidos\":\"Error\",\"direccion\":\"Lima\",\"telefono\":\"999999999\",\"nroDni\":\"1234\",\"estado\":\"ACTIVO\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"12 - Rechazar DNI de longitud incorrecta: HTTP 400\", function () { pm.response.to.have.status(400); });",
+              "pm.expect(pm.response.code).to.eql(400);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "13 - Rechazar producto con precio cero",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/productos",
+          "host": [
+            "localhost:8083"
+          ],
+          "path": [
+            "api",
+            "productos"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombre\":\"Producto inválido\",\"precio\":0,\"stock\":2,\"categoriaId\":{{categoriaId}}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"13 - Rechazar producto con precio cero: HTTP 400\", function () { pm.response.to.have.status(400); });",
+              "pm.expect(pm.response.code).to.eql(400);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "14 - Rechazar pedido con cantidad cero",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8084/api/pedidos",
+          "host": [
+            "localhost:8084"
+          ],
+          "path": [
+            "api",
+            "pedidos"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"fecha\":\"2026-11-09\",\"idCliente\":{{clienteId}},\"detalles\":[{\"idProducto\":{{productoId}},\"cantidad\":0}]}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"14 - Rechazar pedido con cantidad cero: HTTP 400\", function () { pm.response.to.have.status(400); });",
+              "pm.expect(pm.response.code).to.eql(400);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "15 - Rechazar pedido con cliente inexistente",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8084/api/pedidos",
+          "host": [
+            "localhost:8084"
+          ],
+          "path": [
+            "api",
+            "pedidos"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"fecha\":\"2026-11-09\",\"idCliente\":999999,\"detalles\":[{\"idProducto\":{{productoId}},\"cantidad\":1}]}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"15 - Rechazar pedido con cliente inexistente: HTTP 400\", function () { pm.response.to.have.status(400); });",
+              "pm.expect(pm.response.code).to.eql(400);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "16 - Rechazar pedido con producto inexistente",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8084/api/pedidos",
+          "host": [
+            "localhost:8084"
+          ],
+          "path": [
+            "api",
+            "pedidos"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"fecha\":\"2026-11-09\",\"idCliente\":{{clienteId}},\"detalles\":[{\"idProducto\":999999,\"cantidad\":1}]}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"16 - Rechazar pedido con producto inexistente: HTTP 400\", function () { pm.response.to.have.status(400); });",
+              "pm.expect(pm.response.code).to.eql(400);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "17 - Confirmar pedido inexistente",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8084/api/pedidos/999999",
+          "host": [
+            "localhost:8084"
+          ],
+          "path": [
+            "api",
+            "pedidos",
+            "999999"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"17 - Confirmar pedido inexistente: HTTP 404\", function () { pm.response.to.have.status(404); });",
+              "pm.expect(pm.response.code).to.eql(404);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "18 - Actualizar cliente",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/clientes/{{clienteId}}",
+          "host": [
+            "localhost:8081"
+          ],
+          "path": [
+            "api",
+            "clientes",
+            "{{clienteId}}"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombre\":\"Carlos\",\"apellidos\":\"Ramírez actualizados\",\"direccion\":\"Lima\",\"telefono\":\"999999999\",\"nroDni\":\"{{testDni}}\",\"estado\":\"ACTIVO\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"18 - Actualizar cliente: HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.expect(pm.response.json().apellidos).to.include('actualizados');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "19 - Actualizar producto",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/productos/{{productoId}}",
+          "host": [
+            "localhost:8083"
+          ],
+          "path": [
+            "api",
+            "productos",
+            "{{productoId}}"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombre\":\"Laptop actualizada\",\"precio\":2600,\"stock\":8,\"categoriaId\":{{categoriaId}}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"19 - Actualizar producto: HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.expect(pm.response.json().nombre).to.eql('Laptop actualizada');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "20 - Eliminar producto de prueba",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/productos/{{productoId}}",
+          "host": [
+            "localhost:8083"
+          ],
+          "path": [
+            "api",
+            "productos",
+            "{{productoId}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"20 - Eliminar producto de prueba: HTTP 204\", function () { pm.response.to.have.status(204); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "21 - Eliminar cliente de prueba",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/clientes/{{clienteId}}",
+          "host": [
+            "localhost:8081"
+          ],
+          "path": [
+            "api",
+            "clientes",
+            "{{clienteId}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"21 - Eliminar cliente de prueba: HTTP 204\", function () { pm.response.to.have.status(204); });"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
