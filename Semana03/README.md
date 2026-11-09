@@ -1,6 +1,6 @@
 # Semana 03 - Laboratorio 03: Construcción de Servicios Web RESTful
 
-**Estado:** Implementación desarrollada y compilada. La ejecución de MySQL y las solicitudes de Postman quedan pendientes porque XAMPP no pudo iniciar en el entorno usado para preparar esta entrega. El código está en [modulo-ventas-api](modulo-ventas-api/); el informe con la implementación, explicación de código y dos conclusiones está en [Informe del Laboratorio 03](../Documentos/Laboratorios/Semana%203/Informe_Laboratorio_03.pdf).
+**Estado:** Implementación desarrollada y compilada. La ejecución de MySQL y las solicitudes de Postman quedan pendientes porque XAMPP no pudo iniciar en el entorno usado para preparar esta entrega. El código está en [modulo-ventas-api](modulo-ventas-api/); el informe con la implementación, explicación de código y dos conclusiones está en [Informe del Laboratorio 03](../Documentos/Laboratorios/Semana%203/Semana%203.pdf).
 
 ## Objetivo
 
