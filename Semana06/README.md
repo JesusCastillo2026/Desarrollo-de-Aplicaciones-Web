@@ -1,5 +1,7 @@
 # Semana 06 — Laboratorio 06: AOP y control de acceso
 
+**Estado:** Laboratorio 6 completado.
+
 ## Objetivo
 
 Aplicar programación orientada a aspectos (AOP) para auditar las operaciones de productos y añadir validación de acceso por rol en la API REST.
