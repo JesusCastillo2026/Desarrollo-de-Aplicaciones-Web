@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mi perfil personal</title>
+    <style>
+        :root { font-family: "Segoe UI", Arial, sans-serif; color: #172033; background: #f3f6fb; }
+        body { margin: 0; padding: 48px 18px; }
+        main { max-width: 720px; margin: auto; }
+        .card { background: #fff; border: 1px solid #dce4ef; border-radius: 16px; padding: 32px; box-shadow: 0 12px 36px #1b355514; }
+        h1 { margin: 0 0 8px; font-size: 1.8rem; }
+        .intro { margin: 0 0 26px; color: #526079; }
+        .profile { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+        .field { padding: 14px; border: 1px solid #e3e9f1; border-radius: 10px; }
+        .label { display: block; margin-bottom: 5px; font-size: .78rem; font-weight: 700; color: #526079; text-transform: uppercase; letter-spacing: .04em; }
+        .value { font-size: 1rem; }
+        .hobbies { grid-column: 1 / -1; }
+        ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 0; padding: 0; list-style: none; }
+        li { padding: 7px 11px; border-radius: 999px; background: #edf4ff; color: #214d8b; }
+        a { display: inline-block; margin-top: 24px; color: #1757a6; font-weight: 600; }
+    </style>
+</head>
+<body>
+<main>
+    <section class="card" aria-labelledby="title">
+        <h1 id="title">Mi información personal</h1>
+        <p class="intro">Perfil de estudiante mostrado con una vista Thymeleaf.</p>
+        <div class="profile">
+            <div class="field"><span class="label">Nombre</span><span class="value" th:text="${persona.nombre}">Nombre</span></div>
+            <div class="field"><span class="label">Apellidos</span><span class="value" th:text="${persona.apellidos}">Apellidos</span></div>
+            <div class="field"><span class="label">Estado civil</span><span class="value" th:text="${persona.estadoCivil}">Estado civil</span></div>
+            <div class="field"><span class="label">Carrera</span><span class="value" th:text="${persona.carrera}">Carrera</span></div>
+            <div class="field"><span class="label">Institución</span><span class="value" th:text="${persona.instituto}">Institución</span></div>
+            <div class="field"><span class="label">Distrito</span><span class="value" th:text="${persona.distrito}">Distrito</span></div>
+            <div class="field"><span class="label">Equipo</span><span class="value" th:text="${persona.equipo}">Equipo</span></div>
+            <div class="field hobbies">
+                <span class="label">Pasatiempos</span>
+                <ul><li th:each="pasatiempo : ${persona.pasatiempos}" th:text="${pasatiempo}">Pasatiempo</li></ul>
+            </div>
+        </div>
+        <a th:href="@{/api/perfil}">Consultar el mismo perfil en formato JSON</a>
+    </section>
+</main>
+</body>
+</html>

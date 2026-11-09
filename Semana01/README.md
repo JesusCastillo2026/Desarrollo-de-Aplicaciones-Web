@@ -1,13 +1,14 @@
 # Semana 01 — Laboratorio 1: Configuración del entorno
 
-**Estado:** Falta realizar el laboratorio. Por ahora, solo está disponible el PDF de referencia en [Documentos](../Documentos/README.md).
+**Estado:** Laboratorio 1 completado. El proyecto ejecutable está en [Apli01](Apli01/), y el PDF de evidencias y guía está en [Documentos](../Documentos/README.md).
 
 ## Objetivo
 
-Preparar el entorno de desarrollo necesario para trabajar con Java y Spring, reconociendo las herramientas, configuraciones y estructura inicial que se utilizarán en los laboratorios del curso.
+Preparar el entorno de desarrollo y construir una aplicación Spring Boot de información personal que use un controlador MVC con Thymeleaf, un objeto `Model` y un endpoint REST.
 
 ## Material del laboratorio
 
-El PDF de la semana documenta la configuración del entorno de desarrollo y sirve como guía de instalación y puesta a punto.
+La aplicación muestra el perfil en una vista HTML dinámica y expone los mismos datos como JSON. El documento incluye las evidencias de código y de ejecución.
 
-[Consultar el PDF del Laboratorio 1](../Documentos/Laboratorios/Semana%201/Semana%201.pdf).
+- [Abrir el proyecto](Apli01/README.md)
+- [Consultar los documentos del Laboratorio 1](../Documentos/README.md)
