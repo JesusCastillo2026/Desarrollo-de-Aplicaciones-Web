@@ -2,6 +2,8 @@
 
 En esta semana se incluyen dos entregas independientes: el **Laboratorio 08**, sobre pruebas automatizadas y mantenimiento de una API de productos, y la **Evaluación 2**, que amplía el Sistema de Gestión Quirúrgica.
 
+**Estado:** Laboratorio 8 y Evaluación 2 completados.
+
 ## Laboratorio 08 — Implementación de Tests
 
 - [Proyecto del laboratorio](Laboratorio%2008/lab08-tests-categorias/)
