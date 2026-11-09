@@ -2,6 +2,8 @@
 
 API REST independiente para practicar autenticación con JWT y autorización por roles.
 
+**Estado:** Laboratorio 9 completado.
+
 ## Entrega
 
 [Abrir el proyecto del Laboratorio 09](lab09-jwt-security/)
