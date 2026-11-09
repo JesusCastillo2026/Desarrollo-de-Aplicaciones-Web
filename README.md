@@ -19,7 +19,7 @@ Portafolio de laboratorios y evaluaciones organizados por semana.
 > ## 📝 EVALUACIÓN 3 — SEMANA 12
 > Esta evaluación individual corresponde a la asignación N.º 4: Pedidos de restaurante. Incluye los servicios Cliente, Plato y Pedido, bases MySQL separadas, APIs REST, persistencia JPA y perfiles YAML. Las 28 aserciones de Postman aprobaron; el código, el informe PDF y las evidencias están en la carpeta de entrega.
 >
-> **Entrega:** [Abrir carpeta de Evaluación 3](Semana12/gestion-pedidos-restaurante/)
+> **Entrega:** [Abrir carpeta de Evaluación 3](Semana12/Evaluaci%C3%B3n%203/)
 
 ## Contenido
 
