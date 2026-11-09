@@ -1,5 +1,7 @@
 # Semana 03
 
+**Estado:** Falta realizar la actividad de esta semana.
+
 ## Objetivo
 No hay actividades o entregas registradas para esta semana en la organización indicada.
 
