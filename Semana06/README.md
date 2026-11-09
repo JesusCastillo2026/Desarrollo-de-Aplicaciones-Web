@@ -1,6 +1,6 @@
 # Semana 06 — Laboratorio 06: AOP y control de acceso
 
-**Estado:** Laboratorio 6 completado.
+**Estado:** Semana 6 — Laboratorio completado.
 
 ## Objetivo
 
