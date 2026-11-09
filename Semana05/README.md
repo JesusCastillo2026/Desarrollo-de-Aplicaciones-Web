@@ -1,5 +1,7 @@
 # Semana 05 — Laboratorio 05: API de productos
 
+**Estado:** Laboratorio 5 completado.
+
 ## Objetivo
 Construir una API REST para administrar productos con persistencia en base de datos, validación de datos y manejo de errores.
 
