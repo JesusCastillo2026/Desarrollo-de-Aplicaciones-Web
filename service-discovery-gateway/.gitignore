@@ -1,0 +1,7 @@
+**/target/
+**/maven-build.log
+maven-build.log
+/tmp/
+/tmp/**
+
+**/run*.log

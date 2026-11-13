@@ -1,0 +1,2 @@
+package com.tecsup.pedido.dto; import jakarta.validation.Valid; import jakarta.validation.constraints.*; import java.time.LocalDate; import java.util.List; import java.math.BigDecimal;
+public record PedidoRequest(@NotNull LocalDate fecha,@NotNull @Positive Long idCliente,@NotEmpty List<@Valid DetalleRequest> detalles){public record DetalleRequest(@NotNull @Positive Long idProducto,@NotNull @Positive Integer cantidad,@NotNull @DecimalMin("0.01") BigDecimal precio){}}

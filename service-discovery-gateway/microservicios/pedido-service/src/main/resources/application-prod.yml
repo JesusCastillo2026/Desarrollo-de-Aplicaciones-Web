@@ -1,0 +1,26 @@
+server:
+  port: ${SERVER_PORT:8084}
+spring:
+  application:
+    name: pedido-service
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/bd_pedido?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC}
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+pedido:
+  url-clientes: ${CLIENTE_URL:http://localhost:8081}
+  url-productos: ${PRODUCTO_URL:http://localhost:8083}
+
